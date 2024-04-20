@@ -12,13 +12,14 @@ class CustomTextField extends StatelessWidget {
       this.keyboardType = TextInputType.text,
       required this.controller,
       required this.validator,
-      this.obscureText = false});
+      this.obscureText = false,this.color=MyColors.whiteColor});
 
   String hint;
   TextInputType keyboardType;
   TextEditingController controller;
   String? Function(String?) validator;
   bool obscureText;
+  Color color;
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +32,7 @@ class CustomTextField extends StatelessWidget {
           hintStyle: Styles.textStyle16.copyWith(color: MyColors.blackColor),
           enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(10),
-            borderSide: BorderSide(color: MyColors.whiteColor, width: 2),
+            borderSide: BorderSide(color: color, width: 2),
           ),
           focusedBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(10),

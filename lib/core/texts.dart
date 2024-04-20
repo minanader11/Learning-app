@@ -45,4 +45,14 @@ class MyTexts {
   static const String verifyEmail='Verify Your Email';
   static const String enterCode='Please enter Your Code';
   static const String verify='Verify';
+  static const String yourEmail=" Your Email";
+  static const String yourCenter=" Your Center";
+  static const String yourGrade=" Your Grade";
+  static const String yourPhone=" Your PhoneNumber";
+  static const String yourUserName=" Your Username";
+  static const String chemistryAcademy='Chemistry Academy';
+  static const String yourBalanceAccount='Your Balance Account';
+  static const String enterYourCode='Enter Your Code';
+
+
 }

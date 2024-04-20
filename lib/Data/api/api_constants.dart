@@ -6,5 +6,7 @@ class ApiConstants{
   static const String grades='/api/grades';
   static const String centers='/api/centers';
   static const String verify='/api/auth/email/verify';
+  static const String redeemCode='/api/codes/redeem';
+  static const String getProfile='/api/auth/profile';
 
 }

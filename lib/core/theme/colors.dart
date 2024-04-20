@@ -10,5 +10,7 @@ class MyColors{
   static const focusedBorderColor = Color.fromRGBO(23, 171, 144, 1);
   static const fillColor = Color.fromRGBO(243, 246, 249, 0);
   static const borderColor = Color.fromRGBO(23, 171, 144, 0.4);
+  static const greenColor = Color(0xff5D9CEC);
+  static const lightGreen = Color(0xffDFECDB);
 
 }

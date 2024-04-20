@@ -21,7 +21,8 @@ class UserResponseEntity {
       this.email, 
       this.phone, 
       this.grade, 
-
+this.parentPhone,
+    this.balance,
       this.center,});
 
 
@@ -29,9 +30,11 @@ class UserResponseEntity {
   String? name;
   String? email;
   String? phone;
-  GradeResponseEntity? grade;
+  GradeEntity? grade;
 
-  CentersResponseEntity? center;
+  CenterEntity? center;
+  num? balance;
+  String?parentPhone;
 
 
 

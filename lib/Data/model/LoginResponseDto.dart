@@ -25,6 +25,7 @@ class UserResponseDto extends UserResponseEntity {
     super.phone,
     super.grade,
     super.center,
+    super.balance,super.parentPhone,
   });
 
   UserResponseDto.fromJson(dynamic json) {
@@ -33,9 +34,11 @@ class UserResponseDto extends UserResponseEntity {
     email = json['email'];
     phone = json['phone'];
     grade =
-        json['grade'] != null ? GradeResponseDto.fromJson(json['grade']) : null;
+        json['grade'] != null ? GradeDto.fromJson(json['grade']) : null;
     center = json['center'] != null
-        ? CentersResponseDto.fromJson(json['center'])
+        ? Centers.fromJson(json['center'])
         : null;
+    balance=json['balance'];
+    parentPhone=json['parent_phone'];
   }
 }

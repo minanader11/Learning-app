@@ -9,6 +9,7 @@ import 'package:mario_app/presentation/authentication/register/view_model/regist
 
 import 'package:mario_app/presentation/authentication/verify_code/view/verify_email_view.dart';
 import 'package:mario_app/presentation/main_page/view/main_screen.dart';
+import 'package:mario_app/presentation/main_page/view_model/main_screen_view_model.dart';
 
 void main() {
   runApp(MultiBlocProvider(providers: [
@@ -20,7 +21,10 @@ void main() {
         ..getGrades()
         ..getCenters(),
     ),
-    BlocProvider<LoginViewModel>(create: (context) => LoginViewModel(loginUseCase: injectLoginUseCase()),)
+    BlocProvider<LoginViewModel>(
+      create: (context) => LoginViewModel(loginUseCase: injectLoginUseCase()),
+    ),
+    BlocProvider(create: (context) => MainScreenViewModel(redeemCodeUseCase: injectRedeemCodeUseCase(),getProfileUseCase: injectGetProfileUseCase()),)
   ], child: MyApp()));
 }
 

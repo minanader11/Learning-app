@@ -6,11 +6,14 @@ import 'package:mario_app/Data/api/api_constants.dart';
 import 'package:mario_app/Data/model/CentersResponseDto.dart';
 import 'package:mario_app/Data/model/GradeResponseDto.dart';
 import 'package:mario_app/Data/model/LoginResponseDto.dart';
+import 'package:mario_app/Data/model/RedeemCodeResponseDto.dart';
 import 'package:mario_app/Data/model/RegisterResponseDto.dart';
 import 'package:mario_app/Data/model/VerifyResponseDto.dart';
 import 'package:mario_app/Data/model/request/LoginRequestDto.dart';
+import 'package:mario_app/Data/model/request/RedeemCodeRequest.dart';
 import 'package:mario_app/Data/model/request/RegsiterRequestDto.dart';
 import 'package:mario_app/Data/model/request/VerifyRequestDto.dart';
+import 'package:mario_app/Domain/entities/RedeemCodeResponseEntity.dart';
 import 'package:mario_app/Domain/entities/failure.dart';
 import 'package:http/http.dart' as http;
 class ApiService{
@@ -124,6 +127,64 @@ class ApiService{
         print(response.body.toString());
         print(response.statusCode);
         return Left(ServerFailure(errMsg: loginResponse.message!));
+      }
+    } else{
+      return Left(NetworkFailure(errMsg: 'Check Your Internet Connection'));
+    }
+  }
+  Future<Either<Failures,RedeemCodeResponseEntity>>redeemCode(String code,String token) async{
+    var connectivityResult = await Connectivity().checkConnectivity(); // User defined class
+    if (connectivityResult.contains(ConnectivityResult.mobile) ||
+        connectivityResult.contains(ConnectivityResult.wifi)){
+      Uri url = Uri.https(ApiConstants.baseUrl, ApiConstants.redeemCode);
+      var codeRequest=RedeemCodeRequest(code: code);
+      // print(registerRequest.toJson().toString());
+      var response =await http.post(url,body: codeRequest.toJson(),headers: {
+        'Authorization':'Bearer $token'
+      });
+      var codeResponse= RedeemCodeResponseDto.fromJson(jsonDecode(response.body));
+       print(codeResponse.toString());
+      print('=========');
+       print(response.body);
+      if(response.statusCode>=200 && response.statusCode <300 ){
+        print('okkkk');
+        // return Right(registerResponse);
+
+        return Right(codeResponse);
+      }else{
+        print('eroooooor');
+        print(response.body.toString());
+        print(response.statusCode);
+        return Left(ServerFailure(errMsg: codeResponse.message!));
+      }
+    } else{
+      return Left(NetworkFailure(errMsg: 'Check Your Internet Connection'));
+    }
+  }
+  Future<Either<Failures,LoginResponseDto>>getProfile(String token) async{
+    var connectivityResult = await Connectivity().checkConnectivity(); // User defined class
+    if (connectivityResult.contains(ConnectivityResult.mobile) ||
+        connectivityResult.contains(ConnectivityResult.wifi)){
+      Uri url = Uri.https(ApiConstants.baseUrl, ApiConstants.getProfile);
+
+      // print(registerRequest.toJson().toString());
+      var response =await http.get(url,headers: {
+        'Authorization':'Bearer $token'
+      });
+      var userResponse= LoginResponseDto.fromJson(jsonDecode(response.body));
+      print(userResponse.toString());
+      print('=========');
+      print(response.body);
+      if(response.statusCode>=200 && response.statusCode <300 ){
+        print('okkkk');
+        // return Right(registerResponse);
+
+        return Right(userResponse);
+      }else{
+        print('eroooooor');
+        print(response.body.toString());
+        print(response.statusCode);
+        return Left(ServerFailure(errMsg: userResponse.message!));
       }
     } else{
       return Left(NetworkFailure(errMsg: 'Check Your Internet Connection'));
