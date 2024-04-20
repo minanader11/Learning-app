@@ -28,3 +28,5 @@ class GradeItemInitialStates extends RegisterStates{}
 class DropDownGradeChangeItemState extends RegisterStates{}
 class CenterItemInitialStates extends RegisterStates{}
 class DropDownCenterChangeItemState extends RegisterStates{}
+class UserEmailInitialState extends RegisterStates{}
+class UserEmailChangeState extends RegisterStates{}

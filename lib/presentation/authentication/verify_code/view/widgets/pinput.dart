@@ -18,7 +18,7 @@ class PinputExample extends StatefulWidget {
 }
 
 class _PinputExampleState extends State<PinputExample> {
-VerifyScreenViewModel verifyScreenViewModel=VerifyScreenViewModel(verifyUseCase: injectVerifyUseCase());
+//VerifyScreenViewModel verifyScreenViewModel=VerifyScreenViewModel(verifyUseCase: injectVerifyUseCase());
 
 
 
@@ -114,7 +114,7 @@ VerifyScreenViewModel verifyScreenViewModel=VerifyScreenViewModel(verifyUseCase:
                 verifyScreenViewModel.focusNode.unfocus();
                 verifyScreenViewModel.formKey.currentState!.validate();
                 verifyScreenViewModel.verify(registerBloc.userEmail);
-                print(registerBloc.userEmail);
+                print('VerifyEmail:${registerBloc.userEmail}');
               },
               style: ElevatedButton.styleFrom(
                 backgroundColor: MyColors.whiteColor,

@@ -3,21 +3,24 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mario_app/Domain/DI.dart';
 import 'package:mario_app/presentation/authentication/login/view/login_Screen.dart';
+import 'package:mario_app/presentation/authentication/login/view_model/login_view_model.dart';
 import 'package:mario_app/presentation/authentication/register/view/register_screen.dart';
 import 'package:mario_app/presentation/authentication/register/view_model/register_view_model.dart';
+
 import 'package:mario_app/presentation/authentication/verify_code/view/verify_email_view.dart';
-import 'package:mario_app/presentation/authentication/verify_code/view_model/Verify_view_model.dart';
+import 'package:mario_app/presentation/main_page/view/main_screen.dart';
 
 void main() {
   runApp(MultiBlocProvider(providers: [
-    BlocProvider(
+    BlocProvider<RegisterViewModel>(
       create: (context) => RegisterViewModel(
           getGradesUseCase: injectGetGradesUseCase(),
           getCentersUseCase: injecetGetGradesUseCase(),
-          registerUseCase: injectRegisterUseCase()),
-      
+          registerUseCase: injectRegisterUseCase())
+        ..getGrades()
+        ..getCenters(),
     ),
-    BlocProvider(create: (context) => VerifyScreenViewModel(verifyUseCase: injectVerifyUseCase()),)
+    BlocProvider<LoginViewModel>(create: (context) => LoginViewModel(loginUseCase: injectLoginUseCase()),)
   ], child: MyApp()));
 }
 
@@ -36,11 +39,12 @@ class MyApp extends StatelessWidget {
         routes: {
           // SplashScreen.routeName: (context) => SplashScreen(),
           LoginScreen.routeName: (context) => LoginScreen(),
+          MainScreen.routeName: (context) => MainScreen(),
           RegisterScreen.routeName: (context) => RegisterScreen(),
           // MainScreen.routeName: (context) => MainScreen(),
           VerifyEmailScreen.routeName: (context) => VerifyEmailScreen(),
         },
-        initialRoute: RegisterScreen.routeName,
+        initialRoute: LoginScreen.routeName,
       ),
     );
   }

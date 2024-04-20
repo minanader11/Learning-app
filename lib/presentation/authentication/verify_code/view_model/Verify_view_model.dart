@@ -17,6 +17,11 @@ class VerifyScreenViewModel extends Cubit<VerifyScreenStates>{
     if(validate){
      emit(VerifyLoadingState());
      var response = await verifyUseCase.invoke(email, pinController.text);
+     response.fold((l) {
+       emit(VerifyErrorState(errorMsg: l.errMsg));
+     }, (r) {
+       emit(VerifySuccessState());
+     });
     }
   }
 

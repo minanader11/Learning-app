@@ -1,6 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:mario_app/Data/api/api_service.dart';
 import 'package:mario_app/Domain/data_source/authentication_data_source.dart';
+import 'package:mario_app/Domain/entities/LoginResponseEntity.dart';
 import 'package:mario_app/Domain/entities/RegisterResponseEntity.dart';
 import 'package:mario_app/Domain/entities/VerifyEmailResponseEntity.dart';
 import 'package:mario_app/Domain/entities/centersResponseEntity.dart';
@@ -34,6 +35,12 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
   @override
   Future<Either<Failures, VerifyEmailResponseEntity>> verify(String email, String code) async{
     var either = await apiService.verify(email, code);
+    return either.fold((l) => Left(l), (r) => Right(r));
+  }
+
+  @override
+  Future<Either<Failures, LoginResponseEntity>> login(String email, String password) async{
+    var either =await apiService.login(email, password);
     return either.fold((l) => Left(l), (r) => Right(r));
   }
 }

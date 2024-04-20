@@ -1,0 +1,41 @@
+import 'package:mario_app/Domain/entities/centersResponseEntity.dart';
+import 'package:mario_app/Domain/entities/gradeResponseEntity.dart';
+
+class LoginResponseEntity {
+  LoginResponseEntity({
+      this.user, 
+      this.token,});
+
+
+  UserResponseEntity? user;
+  String? token;
+
+
+
+}
+
+class UserResponseEntity {
+  UserResponseEntity({
+      this.id, 
+      this.name, 
+      this.email, 
+      this.phone, 
+      this.grade, 
+
+      this.center,});
+
+
+  num? id;
+  String? name;
+  String? email;
+  String? phone;
+  GradeResponseEntity? grade;
+
+  CentersResponseEntity? center;
+
+
+
+}
+
+
+

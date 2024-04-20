@@ -5,6 +5,7 @@ import 'package:mario_app/Domain/data_source/authentication_data_source.dart';
 import 'package:mario_app/Domain/repo/authentication_repository.dart';
 import 'package:mario_app/Domain/use_cases/getCentersUseCase.dart';
 import 'package:mario_app/Domain/use_cases/getGradesUseCase.dart';
+import 'package:mario_app/Domain/use_cases/loginUseCase.dart';
 import 'package:mario_app/Domain/use_cases/registerUseCase.dart';
 import 'package:mario_app/Domain/use_cases/verifyUseCase.dart';
 
@@ -29,4 +30,7 @@ RegisterUseCase injectRegisterUseCase(){
 VerifyUseCase injectVerifyUseCase(){
   return VerifyUseCase(authRepository: injectAuthRepository());
 
+}
+LoginUseCase injectLoginUseCase(){
+  return LoginUseCase(authRepository: injectAuthRepository());
 }

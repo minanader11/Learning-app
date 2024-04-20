@@ -5,8 +5,10 @@ import 'package:dartz/dartz.dart';
 import 'package:mario_app/Data/api/api_constants.dart';
 import 'package:mario_app/Data/model/CentersResponseDto.dart';
 import 'package:mario_app/Data/model/GradeResponseDto.dart';
+import 'package:mario_app/Data/model/LoginResponseDto.dart';
 import 'package:mario_app/Data/model/RegisterResponseDto.dart';
 import 'package:mario_app/Data/model/VerifyResponseDto.dart';
+import 'package:mario_app/Data/model/request/LoginRequestDto.dart';
 import 'package:mario_app/Data/model/request/RegsiterRequestDto.dart';
 import 'package:mario_app/Data/model/request/VerifyRequestDto.dart';
 import 'package:mario_app/Domain/entities/failure.dart';
@@ -67,7 +69,7 @@ class ApiService{
        print('eroooooor');
        print(response.body.toString());
        print(response.statusCode);
-        return Left(ServerFailure(errMsg: response.toString()));
+        return Left(ServerFailure(errMsg: registerResponse.message!));
       }
     } else{
       return Left(NetworkFailure(errMsg: 'Check Your Internet Connection'));
@@ -95,6 +97,33 @@ class ApiService{
         print(response.body.toString());
         print(response.statusCode);
         return Left(ServerFailure(errMsg: verifyResponse.message!));
+      }
+    } else{
+      return Left(NetworkFailure(errMsg: 'Check Your Internet Connection'));
+    }
+  }
+  Future<Either<Failures,LoginResponseDto>>login(String email,String password) async{
+    var connectivityResult = await Connectivity().checkConnectivity(); // User defined class
+    if (connectivityResult.contains(ConnectivityResult.mobile) ||
+        connectivityResult.contains(ConnectivityResult.wifi)){
+      Uri url = Uri.https(ApiConstants.baseUrl, ApiConstants.login);
+      var loginRequest=LoginRequestDto(email: email,password: password);
+      // print(registerRequest.toJson().toString());
+      var response =await http.post(url,body: loginRequest.toJson());
+      var loginResponse= LoginResponseDto.fromJson(jsonDecode(response.body));
+      // print(registerResponse.toString());
+      // print('=========');
+      // print(response.body);
+      if(response.statusCode>=200 && response.statusCode <300 ){
+        print('okkkk');
+        // return Right(registerResponse);
+
+        return Right(loginResponse);
+      }else{
+        print('eroooooor');
+        print(response.body.toString());
+        print(response.statusCode);
+        return Left(ServerFailure(errMsg: loginResponse.message!));
       }
     } else{
       return Left(NetworkFailure(errMsg: 'Check Your Internet Connection'));

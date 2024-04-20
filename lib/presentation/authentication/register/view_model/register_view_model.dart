@@ -77,5 +77,10 @@ class RegisterViewModel extends Cubit<RegisterStates>{
     selectedCenter= newBrand;
     emit(DropDownCenterChangeItemState());
   }
+  changeUserEmail(String newEmail){
+    emit(UserEmailInitialState());
+    userEmail = newEmail;
+    emit(UserEmailChangeState());
+  }
 
 }

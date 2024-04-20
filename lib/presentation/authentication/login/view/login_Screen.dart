@@ -2,12 +2,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:mario_app/Domain/DI.dart';
 import 'package:mario_app/core/texts.dart';
 import 'package:mario_app/core/theme/colors.dart';
 import 'package:mario_app/core/theme/text_styles.dart';
 import 'package:mario_app/presentation/authentication/login/view_model/login_states.dart';
 import 'package:mario_app/presentation/authentication/login/view_model/login_view_model.dart';
 import 'package:mario_app/presentation/authentication/register/view/register_screen.dart';
+import 'package:mario_app/presentation/main_page/view/main_screen.dart';
 import 'package:mario_app/presentation/utils/custom_text_field.dart';
 import 'package:mario_app/presentation/utils/dialog_utils.dart';
 
@@ -21,9 +23,10 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  LoginViewModel viewModel =LoginViewModel();
+  //LoginViewModel viewModel =LoginViewModel(loginUseCase: injectLoginUseCase());
   @override
   Widget build(BuildContext context) {
+    LoginViewModel viewModel =BlocProvider.of<LoginViewModel>(context);
     return BlocListener(bloc:viewModel,listener:(context, state) {
       if (state is LoginLoadingState) {
         DialogUtils.showLoading(context: context);
@@ -43,7 +46,7 @@ class _LoginScreenState extends State<LoginScreen> {
             message: 'Login Successfully',
             actionName: 'ok',
             posActionFun: () {
-              //Navigator.of(context).pushReplacementNamed(HomeScreen.routeName);
+              Navigator.of(context).pushReplacementNamed(MainScreen.routeName);
             });
       }
     },

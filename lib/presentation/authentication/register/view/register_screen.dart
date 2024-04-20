@@ -24,15 +24,13 @@ class RegisterScreen extends StatefulWidget {
 
 class _RegisterScreenState extends State<RegisterScreen> {
   @override
-
-
-  RegisterViewModel viewModel =
-      RegisterViewModel(getGradesUseCase: injectGetGradesUseCase(),getCentersUseCase: injecetGetGradesUseCase(),registerUseCase: injectRegisterUseCase());
+ // RegisterViewModel viewModel =
+   //   RegisterViewModel(getGradesUseCase: injectGetGradesUseCase(),getCentersUseCase: injecetGetGradesUseCase(),registerUseCase: injectRegisterUseCase());
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer(
-      bloc: viewModel..getGrades()..getCenters(),
+    var viewModel=BlocProvider.of<RegisterViewModel>(context);
+    return BlocConsumer<RegisterViewModel,RegisterStates>(
       listener: (context, state) {
         if (state is RegisterLoadingState) {
           DialogUtils.showLoading(context: context);
@@ -292,7 +290,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     padding: EdgeInsets.only(right: 15.w),
                     child: ElevatedButton(
                       onPressed: () {
+                        viewModel.changeUserEmail(viewModel.emailController.text);
+                        print('email: ${viewModel.emailController.text}');
                         viewModel.register();
+
                       },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: MyColors.whiteColor,

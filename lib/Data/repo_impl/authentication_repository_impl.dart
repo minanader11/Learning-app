@@ -1,5 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:mario_app/Domain/data_source/authentication_data_source.dart';
+import 'package:mario_app/Domain/entities/LoginResponseEntity.dart';
 import 'package:mario_app/Domain/entities/RegisterResponseEntity.dart';
 import 'package:mario_app/Domain/entities/VerifyEmailResponseEntity.dart';
 import 'package:mario_app/Domain/entities/centersResponseEntity.dart';
@@ -28,6 +29,11 @@ class AuthRepositoryImpl implements AuthRepository{
   @override
   Future<Either<Failures, VerifyEmailResponseEntity>> verify(String email, String code) {
  return authRemoteDataSource.verify(email, code);
+  }
+
+  @override
+  Future<Either<Failures, LoginResponseEntity>> login(String email, String password) {
+    return authRemoteDataSource.login(email, password);
   }
 
 }
