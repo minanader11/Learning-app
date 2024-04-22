@@ -29,7 +29,7 @@ void main() async{
     BlocProvider<LoginViewModel>(
       create: (context) => LoginViewModel(loginUseCase: injectLoginUseCase()),
     ),
-    BlocProvider(create: (context) => MainScreenViewModel(redeemCodeUseCase: injectRedeemCodeUseCase(),getProfileUseCase: injectGetProfileUseCase()),)
+    BlocProvider(create: (context) => MainScreenViewModel(redeemCodeUseCase: injectRedeemCodeUseCase(),getProfileUseCase: injectGetProfileUseCase(),getLessonsUseCase: injectGetLessonsUseCase(),buyLessonUseCase: injectBuyLessonUseCase()),)
   ], child: MyApp()));
 }
 

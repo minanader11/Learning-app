@@ -32,8 +32,8 @@ class AuthRepositoryImpl implements AuthRepository{
   }
 
   @override
-  Future<Either<Failures, LoginResponseEntity>> login(String email, String password) {
-    return authRemoteDataSource.login(email, password);
+  Future<Either<Failures, LoginResponseEntity>> login(String email, String password,String deviceKey) {
+    return authRemoteDataSource.login(email, password,deviceKey);
   }
 
 }

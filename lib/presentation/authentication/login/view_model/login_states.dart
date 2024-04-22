@@ -11,3 +11,6 @@ class LoginErrorState extends LoginStates{
   String errorMsg;
   LoginErrorState({required this.errorMsg});
 }
+class PushNotificationSetupInitialState extends LoginStates{}
+class PushNotificationSetupSuccessState extends LoginStates{}
+

@@ -26,7 +26,7 @@ class _LoginScreenState extends State<LoginScreen> {
   //LoginViewModel viewModel =LoginViewModel(loginUseCase: injectLoginUseCase());
   @override
   Widget build(BuildContext context) {
-    LoginViewModel viewModel =BlocProvider.of<LoginViewModel>(context);
+    LoginViewModel viewModel =BlocProvider.of<LoginViewModel>(context)..setupPushNotification();
     return BlocListener(bloc:viewModel,listener:(context, state) {
       if (state is LoginLoadingState) {
         DialogUtils.showLoading(context: context);
@@ -111,7 +111,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       style: Styles.textStyle18,
                     ),
                     SizedBox(height: 24.h),
-                    CustomTextField(
+                    CustomTextField(obscureText: true,
                         hint: MyTexts.enterYourPassword,
                         controller: viewModel.passwordController,
                         validator: (text) {

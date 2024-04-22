@@ -8,5 +8,8 @@ class ApiConstants{
   static const String verify='/api/auth/email/verify';
   static const String redeemCode='/api/codes/redeem';
   static const String getProfile='/api/auth/profile';
+  static const String getLessons='/api/lessons';
+  static const String buyLesson='/api/lessons/buy';
+
 
 }

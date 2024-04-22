@@ -146,7 +146,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   SizedBox(
                     height: 24.h,
                   ),
-                  CustomTextField(
+                  CustomTextField(obscureText: true,
                     hint: MyTexts.password,
                     controller: viewModel.passwordController,
                     validator: (text) {

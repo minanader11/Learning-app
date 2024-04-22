@@ -15,7 +15,7 @@ class MyTexts {
   static const String profileIcon='assets/images/profileItem.png';
   static const String categoryPhoto='assets/images/categoryPhoto.png';
   static const String profileActiveIcon='assets/images/profileACTIVEICON.png';
-  static const String welcomeText = 'Welcome Back To Route';
+  static const String welcomeText = 'Welcome Back To \nChemistry Academy';
   static const String pleaseSignText = 'Please sign in with your mail';
   static const String userName = 'User Name';
   static const String enterYourName = 'Enter Your Name';
@@ -53,6 +53,8 @@ class MyTexts {
   static const String chemistryAcademy='Chemistry Academy';
   static const String yourBalanceAccount='Your Balance Account';
   static const String enterYourCode='Enter Your Code';
+  static const String lessons='Lessons';
+
 
 
 }

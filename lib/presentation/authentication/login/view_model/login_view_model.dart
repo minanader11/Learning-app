@@ -1,5 +1,6 @@
 
 
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mario_app/Domain/entities/LoginResponseEntity.dart';
@@ -16,12 +17,12 @@ class LoginViewModel extends Cubit<LoginStates>{
   LoginUseCase loginUseCase;
   UserResponseEntity user=UserResponseEntity();
   String token='';
-
+  String? deviceKey='';
   void login()async {
     bool validate=  formKey.currentState!.validate();
     if(validate){
       emit(LoginLoadingState());
-     var response= await loginUseCase.invoke(emailController.text.toString(), passwordController.text.toString());
+     var response= await loginUseCase.invoke(emailController.text.toString(), passwordController.text.toString(),deviceKey!);
      response.fold((l) {
        emit(LoginErrorState(errorMsg: l.errMsg));
      }, (r) {
@@ -30,6 +31,16 @@ class LoginViewModel extends Cubit<LoginStates>{
        emit(LoginSuccessState());
      });
     }
+  }
+  void setupPushNotification()async {
+    emit(PushNotificationSetupInitialState());
+    final fcm = FirebaseMessaging.instance;
+    await fcm.requestPermission();
+
+    deviceKey= await fcm.getToken();
+
+    print('DeviceKEy:$deviceKey');
+    emit(PushNotificationSetupSuccessState());
   }
 
 }
