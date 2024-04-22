@@ -1,3 +1,4 @@
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mario_app/Domain/entities/LoginResponseEntity.dart';
@@ -19,6 +20,7 @@ class MainScreenViewModel extends Cubit<MainScreenStates>{
  RedeemCodeUseCase redeemCodeUseCase;
  GetProfileUseCase getProfileUseCase;
   UserResponseEntity user=UserResponseEntity();
+  String? token='';
  changeIndex(int newIndex){
    emit(MainScreenInitialState());
    selectedIndex=newIndex;
@@ -48,5 +50,12 @@ class MainScreenViewModel extends Cubit<MainScreenStates>{
    });
 
  }
+  void setupPushNotification()async {
+    final fcm = FirebaseMessaging.instance;
+    await fcm.requestPermission();
+
+    token= await fcm.getToken();
+    print(token);
+  }
 
 }

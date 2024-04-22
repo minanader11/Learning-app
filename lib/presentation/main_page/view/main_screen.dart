@@ -13,7 +13,7 @@ class MainScreen extends StatelessWidget{
 
   @override
   Widget build(BuildContext context) {
-    MainScreenViewModel mainScreenViewModel=BlocProvider.of<MainScreenViewModel>(context);
+    MainScreenViewModel mainScreenViewModel=BlocProvider.of<MainScreenViewModel>(context)..setupPushNotification();
     return BlocConsumer<MainScreenViewModel,MainScreenStates>(listener: (context, state) {
       if (state is RedeemCodeLoadingState) {
         DialogUtils.showLoading(context: context);

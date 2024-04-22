@@ -10,8 +10,13 @@ import 'package:mario_app/presentation/authentication/register/view_model/regist
 import 'package:mario_app/presentation/authentication/verify_code/view/verify_email_view.dart';
 import 'package:mario_app/presentation/main_page/view/main_screen.dart';
 import 'package:mario_app/presentation/main_page/view_model/main_screen_view_model.dart';
-
-void main() {
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
+void main() async{
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   runApp(MultiBlocProvider(providers: [
     BlocProvider<RegisterViewModel>(
       create: (context) => RegisterViewModel(

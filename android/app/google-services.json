@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "822115216638",
+    "project_id": "mario-website-bd39b",
+    "storage_bucket": "mario-website-bd39b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:822115216638:android:1ec7c7a5ec55930c2d49af",
+        "android_client_info": {
+          "package_name": "com.example.mario_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAGJu8S5lHfIvkrJtDPnavYC3nr4nibmOE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
