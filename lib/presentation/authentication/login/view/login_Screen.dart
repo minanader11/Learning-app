@@ -1,7 +1,7 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:mario_app/Domain/DI.dart';
 import 'package:mario_app/core/texts.dart';
 import 'package:mario_app/core/theme/colors.dart';
@@ -26,30 +26,59 @@ class _LoginScreenState extends State<LoginScreen> {
   //LoginViewModel viewModel =LoginViewModel(loginUseCase: injectLoginUseCase());
   @override
   Widget build(BuildContext context) {
-    LoginViewModel viewModel =BlocProvider.of<LoginViewModel>(context)..setupPushNotification();
-    return BlocListener(bloc:viewModel,listener:(context, state) {
-      if (state is LoginLoadingState) {
-        DialogUtils.showLoading(context: context);
-      } else if (state is LoginErrorState) {
-        DialogUtils.hideLoading(context);
-        DialogUtils.showMessage(
-            context: context,
-            message: state.errorMsg,
-            actionName: 'no',
-            posActionFun: () {
-              Navigator.of(context).pop();
-            });
-      } else if(state is LoginSuccessState){
-        DialogUtils.hideLoading(context);
-        DialogUtils.showMessage(
-            context: context,
-            message: 'Login Successfully',
-            actionName: 'ok',
-            posActionFun: () {
-              Navigator.of(context).pushReplacementNamed(MainScreen.routeName);
-            });
-      }
-    },
+    LoginViewModel viewModel = BlocProvider.of<LoginViewModel>(context)
+      ..setupPushNotification();
+    return BlocListener(
+      bloc: viewModel,
+      listener: (context, state) {
+        if (state is LoginLoadingState) {
+          DialogUtils.showLoading(context: context);
+        } else if (state is LoginErrorState) {
+          DialogUtils.hideLoading(context);
+          DialogUtils.showMessage(
+              context: context,
+              message: state.errorMsg,
+              actionName: 'no',
+              posActionFun: () {
+                Navigator.of(context).pop();
+              });
+        } else if (state is LoginSuccessState) {
+          DialogUtils.hideLoading(context);
+          var ftoast = FToast();
+          ftoast.init(context);
+          ftoast.showToast(
+            gravity: ToastGravity.TOP,
+            toastDuration: Duration(seconds: 1),
+            child: Container(
+              padding:
+                  const EdgeInsets.symmetric(horizontal: 24.0, vertical: 12.0),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(25.0),
+                color: Colors.greenAccent,
+              ),
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Icon(Icons.check),
+                  SizedBox(
+                    width: 12.0,
+                  ),
+                  Text("Login Successfully"),
+                ],
+              ),
+            ),
+          );
+          Navigator.of(context).pushReplacementNamed(MainScreen.routeName);
+
+          // DialogUtils.showMessage(
+          //     context: context,
+          //     message: 'Login Successfully',
+          //     actionName: 'ok',
+          //     posActionFun: () {
+          //       Navigator.of(context).pushReplacementNamed(MainScreen.routeName);
+          //     });
+        }
+      },
       child: Scaffold(
         backgroundColor: MyColors.primaryColor,
         body: Padding(
@@ -89,20 +118,21 @@ class _LoginScreenState extends State<LoginScreen> {
                       height: 24.h,
                     ),
                     CustomTextField(
-                        hint: MyTexts.enterYourEmailAddress,
-                        controller: viewModel.emailController,
-                        validator: (text) {
-                          if (text == null || text.trim().isEmpty) {
-                            return 'Please Enter Your Email';
-                          }
-                          bool emailValid = RegExp(
-                              r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
-                              .hasMatch(text);
-                          if (!emailValid) {
-                            return 'Please enter Valid Email';
-                          }
-                          return null;
-                        },),
+                      hint: MyTexts.enterYourEmailAddress,
+                      controller: viewModel.emailController,
+                      validator: (text) {
+                        if (text == null || text.trim().isEmpty) {
+                          return 'Please Enter Your Email';
+                        }
+                        bool emailValid = RegExp(
+                                r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+                            .hasMatch(text);
+                        if (!emailValid) {
+                          return 'Please enter Valid Email';
+                        }
+                        return null;
+                      },
+                    ),
                     SizedBox(
                       height: 32.h,
                     ),
@@ -111,18 +141,20 @@ class _LoginScreenState extends State<LoginScreen> {
                       style: Styles.textStyle18,
                     ),
                     SizedBox(height: 24.h),
-                    CustomTextField(obscureText: true,
-                        hint: MyTexts.enterYourPassword,
-                        controller: viewModel.passwordController,
-                        validator: (text) {
-                          if (text == null || text.trim().isEmpty) {
-                            return 'Please Enter Your Password';
-                          }
-                          if (text.trim().length < 6) {
-                            return 'Password must contains at least 6 characters';
-                          }
-                          return null;
-                        },),
+                    CustomTextField(
+                      obscureText: true,
+                      hint: MyTexts.enterYourPassword,
+                      controller: viewModel.passwordController,
+                      validator: (text) {
+                        if (text == null || text.trim().isEmpty) {
+                          return 'Please Enter Your Password';
+                        }
+                        if (text.trim().length < 6) {
+                          return 'Password must contains at least 6 characters';
+                        }
+                        return null;
+                      },
+                    ),
                     SizedBox(
                       height: 16.h,
                     ),
@@ -138,7 +170,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       height: 56.h,
                     ),
                     Padding(
-                      padding:  EdgeInsets.only(right: 15.w),
+                      padding: EdgeInsets.only(right: 15.w),
                       child: ElevatedButton(
                         onPressed: () {
                           viewModel.login();
@@ -163,7 +195,9 @@ class _LoginScreenState extends State<LoginScreen> {
                     SizedBox(
                       height: 32.h,
                     ),
-                    InkWell(onTap: () => Navigator.of(context).pushNamed(RegisterScreen.routeName),
+                    InkWell(
+                      onTap: () => Navigator.of(context)
+                          .pushNamed(RegisterScreen.routeName),
                       child: Text(
                         MyTexts.dontHaveAccount,
                         textAlign: TextAlign.center,

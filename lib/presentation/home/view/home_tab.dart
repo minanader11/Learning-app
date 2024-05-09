@@ -9,6 +9,8 @@ import 'package:mario_app/presentation/home/view/widgets/lesson_list.dart';
 import 'package:mario_app/presentation/main_page/view_model/main_screen_states.dart';
 import 'package:mario_app/presentation/main_page/view_model/main_screen_view_model.dart';
 import 'package:mario_app/presentation/utils/dialog_utils.dart';
+import 'package:mario_app/presentation/utils/shimmer.dart';
+import 'package:shimmer/shimmer.dart';
 
 class HomeTab extends StatelessWidget {
   const HomeTab({super.key});
@@ -73,13 +75,14 @@ class HomeTab extends StatelessWidget {
           },
             builder: (context, state) {
               if (state is GetLessonsILoadingState) {
-                return Expanded(
-                  child: Container(
-                    child: Center(
-                      child: CircularProgressIndicator(),
-                    ),
-                  ),
-                );
+                // return Expanded(
+                //   child: Container(
+                //     child: Center(
+                //       child: CircularProgressIndicator(),
+                //     ),
+                //   ),
+                // );
+                return Expanded(child:ListView.builder(itemBuilder:(context, index) =>  ShimmerLoading(width: 360.w,height: 310.h,)));
               } else if (state is GetLessonsErrorState) {
                 return Center(
                   child: Text(

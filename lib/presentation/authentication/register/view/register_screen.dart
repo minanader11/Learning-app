@@ -41,6 +41,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
               message: state.errorMsg,
               actionName: 'ok',
               posActionFun: () {
+
                 Navigator.of(context).pop();
               });
         } else if (state is RegisterSuccessState) {
