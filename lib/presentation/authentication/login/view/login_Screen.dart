@@ -3,12 +3,14 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:mario_app/Domain/DI.dart';
+import 'package:mario_app/core/imagePaths.dart';
 import 'package:mario_app/core/texts.dart';
 import 'package:mario_app/core/theme/colors.dart';
 import 'package:mario_app/core/theme/text_styles.dart';
 import 'package:mario_app/presentation/authentication/login/view_model/login_states.dart';
 import 'package:mario_app/presentation/authentication/login/view_model/login_view_model.dart';
 import 'package:mario_app/presentation/authentication/register/view/register_screen.dart';
+import 'package:mario_app/presentation/authentication/register/view/widgets/customClipPath.dart';
 import 'package:mario_app/presentation/main_page/view/main_screen.dart';
 import 'package:mario_app/presentation/utils/custom_text_field.dart';
 import 'package:mario_app/presentation/utils/dialog_utils.dart';
@@ -38,7 +40,7 @@ class _LoginScreenState extends State<LoginScreen> {
           DialogUtils.showMessage(
               context: context,
               message: state.errorMsg,
-              actionName: 'no',
+              actionName: 'ok',
               posActionFun: () {
                 Navigator.of(context).pop();
               });
@@ -80,42 +82,29 @@ class _LoginScreenState extends State<LoginScreen> {
         }
       },
       child: Scaffold(
-        backgroundColor: MyColors.primaryColor,
-        body: Padding(
-          padding: EdgeInsets.only(left: 16.w),
-          child: Form(
-            key: viewModel.formKey,
-            child: SingleChildScrollView(
-              child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
+        backgroundColor: MyColors.greyColor,
+        body: Form(
+          key: viewModel.formKey,
+          child: SingleChildScrollView(
+            child: ClipPath(
+              clipper: CustomClipPath(),
+              child: Container(
+                margin: EdgeInsets.only(top: 20.h),
+                padding: EdgeInsets.only(top: 60.h, left: 17.w),
+                color: Colors.white,
+                height: 790.h,
+                width: double.infinity,
+                child: Column(
                   children: [
-                    Padding(
-                      padding: EdgeInsets.only(
-                          top: 91.h, left: 97.w, right: 96.w, bottom: 87.h),
-                      child: Image.asset(
-                        MyTexts.routeImage,
+                    Align(
+                      alignment: Alignment.topLeft,
+                      child: Text(
+                        MyTexts.login,
+                        style: Styles.textStyle40,
                       ),
                     ),
-                    Text(
-                      MyTexts.welcomeText,
-                      style: Styles.textStyle24,
-                    ),
                     SizedBox(
-                      height: 8.h,
-                    ),
-                    Text(
-                      MyTexts.pleaseSignText,
-                      style: Styles.textStyle16,
-                    ),
-                    SizedBox(
-                      height: 40.h,
-                    ),
-                    Text(
-                      MyTexts.email,
-                      style: Styles.textStyle18,
-                    ),
-                    SizedBox(
-                      height: 24.h,
+                      height: 20.h,
                     ),
                     CustomTextField(
                       hint: MyTexts.enterYourEmailAddress,
@@ -134,13 +123,8 @@ class _LoginScreenState extends State<LoginScreen> {
                       },
                     ),
                     SizedBox(
-                      height: 32.h,
+                      height: 20.h,
                     ),
-                    Text(
-                      MyTexts.password,
-                      style: Styles.textStyle18,
-                    ),
-                    SizedBox(height: 24.h),
                     CustomTextField(
                       obscureText: true,
                       hint: MyTexts.enterYourPassword,
@@ -155,20 +139,43 @@ class _LoginScreenState extends State<LoginScreen> {
                         return null;
                       },
                     ),
+
+                    // Padding(
+                    //   padding: EdgeInsets.only(right: 15.w),
+                    //   child: Text(
+                    //     MyTexts.forgetPassword,
+                    //     style: Styles.textStyle18,
+                    //     textAlign: TextAlign.end,
+                    //   ),
+                    // ),
                     SizedBox(
-                      height: 16.h,
+                      height: 20.h,
                     ),
-                    Padding(
-                      padding: EdgeInsets.only(right: 15.w),
-                      child: Text(
-                        MyTexts.forgetPassword,
-                        style: Styles.textStyle18,
-                        textAlign: TextAlign.end,
+                    // InkWell(
+                    //   onTap: () => Navigator.of(context)
+                    //       .pushNamed(RegisterScreen.routeName),
+                    //   child: Text(
+                    //     MyTexts.dontHaveAccount,
+                    //     textAlign: TextAlign.center,
+                    //     style: Styles.textStyle18.copyWith(color:MyColors.darkGreyColor),
+                    //   ),
+                    // ),
+                    InkWell(onTap: () {
+                      Navigator.of(context)
+                          .pushNamed(RegisterScreen.routeName);
+                    },
+                      child: RichText(
+                        text: TextSpan(
+
+                          style:Styles.textStyle14,
+                          children: <TextSpan>[
+                            TextSpan(text: MyTexts.dontHaveAccount),
+                            TextSpan(text: MyTexts.registerHere, style: Styles.textStyle14.copyWith(color: MyColors.buttonsPurpleColor)),
+                          ],
+                        ),
                       ),
                     ),
-                    SizedBox(
-                      height: 56.h,
-                    ),
+                    Spacer(),
                     Padding(
                       padding: EdgeInsets.only(right: 15.w),
                       child: ElevatedButton(
@@ -176,35 +183,29 @@ class _LoginScreenState extends State<LoginScreen> {
                           viewModel.login();
                         },
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: MyColors.whiteColor,
+                          backgroundColor: MyColors.buttonsPurpleColor,
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(
-                              16.r,
+                              50.r,
                             ),
                           ),
                         ),
                         child: Padding(
-                          padding: EdgeInsets.only(top: 23.h, bottom: 23.h),
+                          padding: EdgeInsets.only(top: 17.h, bottom: 17.h),
                           child: Text(
                             MyTexts.login,
-                            style: Styles.textStyle20,
+                            style: Styles.textStyle18,
                           ),
                         ),
                       ),
                     ),
                     SizedBox(
-                      height: 32.h,
+                      height: 100.h,
                     ),
-                    InkWell(
-                      onTap: () => Navigator.of(context)
-                          .pushNamed(RegisterScreen.routeName),
-                      child: Text(
-                        MyTexts.dontHaveAccount,
-                        textAlign: TextAlign.center,
-                        style: Styles.textStyle18,
-                      ),
-                    )
-                  ]),
+
+                  ],
+                ),
+              ),
             ),
           ),
         ),

@@ -19,7 +19,7 @@ class RegisterViewModel extends Cubit<RegisterStates>{
   List<GradeEntity> grades=[];
    GradeEntity selectedGrade=GradeEntity();
   List<CenterEntity> centers=[];
-  CenterEntity selectedCenter=CenterEntity();
+  CenterEntity selectedCenter=CenterEntity(name: 'Select Your Center',phone: 0,id: 1,location: 'ss');
   GetGradesUseCase getGradesUseCase;
   GetCentersUseCase getCentersUseCase;
   RegisterUseCase registerUseCase;

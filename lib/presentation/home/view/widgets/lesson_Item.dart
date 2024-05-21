@@ -57,7 +57,7 @@ class LessonItem extends StatelessWidget {
                         ),
                   ),
                   Positioned(
-                    left: 280.w,
+                    left: 240.w,
                     child: ElevatedButton(
                         onPressed: () {},
                         child: lesson.hasLesson == true || lesson.price==0

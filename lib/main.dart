@@ -5,12 +5,14 @@ import 'package:mario_app/Domain/DI.dart';
 import 'package:mario_app/presentation/authentication/login/view/login_Screen.dart';
 import 'package:mario_app/presentation/authentication/login/view_model/login_view_model.dart';
 import 'package:mario_app/presentation/authentication/register/view/register_screen.dart';
+import 'package:mario_app/presentation/authentication/register/view/trial_widget.dart';
 import 'package:mario_app/presentation/authentication/register/view_model/register_view_model.dart';
 
 import 'package:mario_app/presentation/authentication/verify_code/view/verify_email_view.dart';
 import 'package:mario_app/presentation/main_page/view/main_screen.dart';
 import 'package:mario_app/presentation/main_page/view_model/main_screen_view_model.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:mario_app/presentation/splash_Screen/splash_Screen.dart';
 import 'firebase_options.dart';
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
@@ -52,8 +54,10 @@ class MyApp extends StatelessWidget {
           RegisterScreen.routeName: (context) => RegisterScreen(),
           // MainScreen.routeName: (context) => MainScreen(),
           VerifyEmailScreen.routeName: (context) => VerifyEmailScreen(),
+          Trial.routeName:(context) => Trial(),
+          SplashScreen.routeName:(context) => SplashScreen()
         },
-        initialRoute: LoginScreen.routeName,
+        initialRoute: SplashScreen.routeName,
       ),
     );
   }

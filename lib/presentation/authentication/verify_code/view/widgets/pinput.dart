@@ -10,7 +10,7 @@ import 'package:mario_app/presentation/authentication/verify_code/view_model/Ver
 import 'package:pinput/pinput.dart';
 
 class PinputExample extends StatefulWidget {
-   PinputExample({required this.onPressed}) : super();
+  PinputExample({required this.onPressed}) : super();
   void Function()? onPressed;
 
   @override
@@ -20,14 +20,12 @@ class PinputExample extends StatefulWidget {
 class _PinputExampleState extends State<PinputExample> {
 //VerifyScreenViewModel verifyScreenViewModel=VerifyScreenViewModel(verifyUseCase: injectVerifyUseCase());
 
-
-
   @override
   Widget build(BuildContext context) {
-    VerifyScreenViewModel verifyScreenViewModel=BlocProvider.of<VerifyScreenViewModel>(context);
+    VerifyScreenViewModel verifyScreenViewModel =
+        BlocProvider.of<VerifyScreenViewModel>(context);
 
-    var registerBloc=BlocProvider.of<RegisterViewModel>(context);
-
+    var registerBloc = BlocProvider.of<RegisterViewModel>(context);
 
     final defaultPinTheme = PinTheme(
       width: 56,
@@ -42,11 +40,10 @@ class _PinputExampleState extends State<PinputExample> {
       ),
     );
 
-
     return Form(
       key: verifyScreenViewModel.formKey,
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
+
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Directionality(
@@ -59,7 +56,11 @@ class _PinputExampleState extends State<PinputExample> {
               androidSmsAutofillMethod:
                   AndroidSmsAutofillMethod.smsUserConsentApi,
               listenForMultipleSmsOnAndroid: true,
-              defaultPinTheme: defaultPinTheme,
+              defaultPinTheme: defaultPinTheme.copyWith(
+                  decoration: BoxDecoration(
+                      color: MyColors.whiteColor,
+                      borderRadius: BorderRadius.circular(4.r),
+                      border: Border.all(color: MyColors.darkGreyColor))),
               separatorBuilder: (index) => const SizedBox(width: 8),
               validator: (value) {
                 //return value == '2222' ? null : 'Pin is incorrect';
@@ -70,10 +71,10 @@ class _PinputExampleState extends State<PinputExample> {
               // },
               hapticFeedbackType: HapticFeedbackType.lightImpact,
               onCompleted: (pin) {
-               // debugPrint('onCompleted: $pin');
+                // debugPrint('onCompleted: $pin');
               },
               onChanged: (value) {
-               // debugPrint('onChanged: $value');
+                // debugPrint('onChanged: $value');
               },
               cursor: Column(
                 mainAxisAlignment: MainAxisAlignment.end,
@@ -88,8 +89,8 @@ class _PinputExampleState extends State<PinputExample> {
               ),
               focusedPinTheme: defaultPinTheme.copyWith(
                 decoration: defaultPinTheme.decoration!.copyWith(
-                  borderRadius: BorderRadius.circular(8),
-                  border: Border.all(color: MyColors.focusedBorderColor),
+                  borderRadius: BorderRadius.circular(4.r),
+                  border: Border.all(color: MyColors.darkGreyColor),
                 ),
               ),
               submittedPinTheme: defaultPinTheme.copyWith(
@@ -105,34 +106,36 @@ class _PinputExampleState extends State<PinputExample> {
             ),
           ),
           SizedBox(
-            height: 56.h,
+            height: 270.h,
           ),
           Padding(
             padding: EdgeInsets.only(right: 15.w),
             child: ElevatedButton(
-              onPressed:() {
+              onPressed: () {
                 verifyScreenViewModel.focusNode.unfocus();
                 verifyScreenViewModel.formKey.currentState!.validate();
                 verifyScreenViewModel.verify(registerBloc.userEmail);
                 print('VerifyEmail:${registerBloc.userEmail}');
               },
               style: ElevatedButton.styleFrom(
-                backgroundColor: MyColors.whiteColor,
+                backgroundColor: MyColors.buttonsPurpleColor,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(
-                    16.r,
+                    50.r,
                   ),
                 ),
               ),
+
               child: Padding(
-                padding: EdgeInsets.only(top: 23.h, bottom: 23.h),
+                padding: EdgeInsets.only(top: 17.h, bottom: 17.h),
                 child: Text(
                   MyTexts.verify,
-                  style: Styles.textStyle20,
+                  style:Styles.textStyle18,
                 ),
               ),
             ),
           ),
+
         ],
       ),
     );

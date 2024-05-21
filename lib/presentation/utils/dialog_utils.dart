@@ -10,17 +10,17 @@ class DialogUtils {
       context: context,
       builder: (context) {
         return AlertDialog(
-          backgroundColor: MyColors.primaryColor,
+          backgroundColor: MyColors.whiteColor,
           content: Row(children: [
             Text(
               'Loading',
-              style: Styles.textStyle20.copyWith(color: MyColors.whiteColor),
+              style: Styles.textStyle20.copyWith(color: MyColors.purpleColor),
             ),
             SizedBox(
               width: 12,
             ),
             CircularProgressIndicator(
-              color: MyColors.whiteColor,
+              color: MyColors.purpleColor,
             )
           ]),
         );
@@ -43,10 +43,10 @@ class DialogUtils {
       context: context,
       builder: (context) {
         return AlertDialog(
-          backgroundColor: MyColors.primaryColor,
+          backgroundColor: MyColors.whiteColor,
           content: Text(
             message,
-            style: Styles.textStyle20.copyWith(color: MyColors.whiteColor),
+            style: Styles.textStyle20.copyWith(color: MyColors.purpleColor),
           ),
           title: Text(title ?? ''),
           actions: [
@@ -60,7 +60,7 @@ class DialogUtils {
                 child: Text(
                   actionName,
                   style:
-                      Styles.textStyle16.copyWith(color: MyColors.whiteColor),
+                      Styles.textStyle16.copyWith(color: MyColors.purpleColor),
                 ))
           ],
         );
