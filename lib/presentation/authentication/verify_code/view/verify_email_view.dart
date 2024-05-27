@@ -59,7 +59,7 @@ class _VerifyEmailScreenState extends State<VerifyEmailScreen> {
         child: Scaffold(
           backgroundColor: MyColors.verifyCodeScreenBackGroundColo,
           body: Padding(
-            padding: EdgeInsets.only(left: 16.w),
+            padding: EdgeInsets.only(left: 17.w,right: 17.w),
             child: Form(
               //key: viewModel.formKey,
               child: SingleChildScrollView(

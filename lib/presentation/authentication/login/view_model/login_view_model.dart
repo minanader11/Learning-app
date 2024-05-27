@@ -11,7 +11,7 @@ class LoginViewModel extends Cubit<LoginStates>{
 
   TextEditingController emailController = TextEditingController(text: 'hubert70@example.com');
   TextEditingController passwordController = TextEditingController(text: '123456');
-  final formKey = GlobalKey<FormState>();
+  GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
   LoginViewModel({required this.loginUseCase}): super(LoginInitialState());
   LoginUseCase loginUseCase;

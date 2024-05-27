@@ -87,13 +87,13 @@ class _PinputExampleState extends State<PinputExample> {
                   ),
                 ],
               ),
-              focusedPinTheme: defaultPinTheme.copyWith(
+              focusedPinTheme: defaultPinTheme.copyWith(textStyle: Styles.textStyle18.copyWith(color: MyColors.purpleColor),
                 decoration: defaultPinTheme.decoration!.copyWith(
                   borderRadius: BorderRadius.circular(4.r),
                   border: Border.all(color: MyColors.darkGreyColor),
                 ),
               ),
-              submittedPinTheme: defaultPinTheme.copyWith(
+              submittedPinTheme: defaultPinTheme.copyWith(textStyle:Styles.textStyle18.copyWith(color: MyColors.purpleColor) ,
                 decoration: defaultPinTheme.decoration!.copyWith(
                   color: MyColors.fillColor,
                   borderRadius: BorderRadius.circular(19),

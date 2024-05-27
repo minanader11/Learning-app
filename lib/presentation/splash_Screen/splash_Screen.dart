@@ -7,6 +7,7 @@ import 'package:mario_app/core/theme/colors.dart';
 import 'package:mario_app/core/theme/text_styles.dart';
 import 'package:mario_app/presentation/authentication/login/view/login_Screen.dart';
 import 'package:mario_app/presentation/authentication/register/view/widgets/customClipPath.dart';
+import 'package:percent_indicator/linear_percent_indicator.dart';
 
 class SplashScreen extends StatefulWidget {
   static const routeName = 'splash_Screen';
@@ -20,7 +21,7 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     super.initState();
     Timer(
-      Duration(seconds: 3), // Change the duration as needed
+      Duration(seconds: 4), // Change the duration as needed
       () {
         Navigator.pushReplacement(
           context,
@@ -55,10 +56,20 @@ class _SplashScreenState extends State<SplashScreen> {
                     color: Colors.white,
                     child: Column(
                       children: [
-                        Padding(
-                          padding:  EdgeInsets.only(bottom: 24.h),
-                          child: Image.asset('assets/images/Progress Bar.png'),
+                        // Padding(
+                        //   padding:  EdgeInsets.only(bottom: 24.h),
+                        //   child: Image.asset('assets/images/Progress Bar.png'),
+                        // ),
+                        LinearPercentIndicator(alignment: MainAxisAlignment.center,
+                          width: 180.w,
+                          animation: true,
+                          lineHeight: 10.h,
+                          animationDuration: 3000,
+                          percent: 1,
+                          barRadius: Radius.circular(10.r),
+                          progressColor: MyColors.purpleColor,
                         ),
+                        SizedBox(height: 24.h,),
                         Text(
                           MyTexts.lets,
                           style: Styles.textStyle30,

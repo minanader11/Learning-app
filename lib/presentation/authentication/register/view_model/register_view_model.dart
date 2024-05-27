@@ -24,7 +24,7 @@ class RegisterViewModel extends Cubit<RegisterStates>{
   GetCentersUseCase getCentersUseCase;
   RegisterUseCase registerUseCase;
   String userEmail='';
-  final formKey = GlobalKey<FormState>();
+  GlobalKey<FormState> formKey = GlobalKey<FormState>();
   void register()async {
     bool validate=  formKey.currentState!.validate();
 

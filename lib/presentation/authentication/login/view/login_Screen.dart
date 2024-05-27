@@ -30,13 +30,14 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget build(BuildContext context) {
     LoginViewModel viewModel = BlocProvider.of<LoginViewModel>(context)
       ..setupPushNotification();
-    return BlocListener(
-      bloc: viewModel,
+    return BlocListener<LoginViewModel,LoginStates>(
+      //bloc: viewModel,
       listener: (context, state) {
         if (state is LoginLoadingState) {
           DialogUtils.showLoading(context: context);
         } else if (state is LoginErrorState) {
           DialogUtils.hideLoading(context);
+        //  DialogUtils.hideLoading(context);
           DialogUtils.showMessage(
               context: context,
               message: state.errorMsg,
@@ -90,7 +91,7 @@ class _LoginScreenState extends State<LoginScreen> {
               clipper: CustomClipPath(),
               child: Container(
                 margin: EdgeInsets.only(top: 20.h),
-                padding: EdgeInsets.only(top: 60.h, left: 17.w),
+                padding: EdgeInsets.only(top: 60.h, left: 17.w,right: 17.w),
                 color: Colors.white,
                 height: 790.h,
                 width: double.infinity,
@@ -162,7 +163,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     // ),
                     InkWell(onTap: () {
                       Navigator.of(context)
-                          .pushNamed(RegisterScreen.routeName);
+                          .pushReplacementNamed(RegisterScreen.routeName);
                     },
                       child: RichText(
                         text: TextSpan(

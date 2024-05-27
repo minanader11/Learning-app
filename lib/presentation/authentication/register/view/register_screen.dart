@@ -70,7 +70,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       clipper: CustomClipPath(),
                       child: Container(
                         margin: EdgeInsets.only(top: 20.h),
-                        padding: EdgeInsets.only(top: 60.h, left: 17.w),
+                        padding: EdgeInsets.only(top: 60.h, left: 17.w,right: 17.w),
                         color: Colors.white,
                         height: 790.h,
                         width: double.infinity,
@@ -336,7 +336,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                 InkWell(
                                   onTap: () {
                                     Navigator.of(context)
-                                        .pushNamed(LoginScreen.routeName);
+                                        .pushReplacementNamed(LoginScreen.routeName);
                                   },
                                   child: RichText(
                                     text: TextSpan(
