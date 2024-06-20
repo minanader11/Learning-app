@@ -26,8 +26,7 @@ class LessonDto extends LessonEntity {
     super.section,
     super.grade,
     super.hasLesson,
-    super.lessonVideoUrl,
-    super.homeworkUrl,
+    super.isFavorite,
     super.image,
   });
 
@@ -41,8 +40,7 @@ class LessonDto extends LessonEntity {
         json['section'] != null ? SectionDto.fromJson(json['section']) : null;
     grade = json['grade'] != null ? GradeDto.fromJson(json['grade']) : null;
     hasLesson = json['has_lesson'];
-    lessonVideoUrl = json['lesson_video_url'];
-    homeworkUrl = json['homework_url'];
+   isFavorite=json['is_favourite'];
     image = json['image'];
   }
 }

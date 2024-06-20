@@ -17,4 +17,5 @@ class ImagePaths{
   static const String profileActiveIcon='assets/images/profileACTIVEICON.png';
   static const String  selectedFavoriteIconImage='assets/images/favoriteProductIcon.png';
   static const String backGroundImageRegisterLogin='assets/images/Login.png';
+  static const String profileAvatar='assets/images/profileAvatar.svg';
 }

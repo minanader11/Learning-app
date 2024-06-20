@@ -30,13 +30,13 @@ class MyTexts {
   static const String verifyEmail='Write Your Code';
   static const String enterCode='Please Enter Your Code';
   static const String verify='Verify';
-  static const String yourEmail=" Your Email";
-  static const String yourCenter=" Your Center";
-  static const String yourGrade=" Your Grade";
-  static const String yourPhone=" Your PhoneNumber";
-  static const String yourUserName=" Your Username";
+  static const String yourEmail="Email";
+  static const String yourCenter="Center";
+  static const String yourGrade="Grade";
+  static const String yourPhone="Phone Number";
+  static const String yourUserName="Username";
   static const String chemistryAcademy='Chemistry Academy';
-  static const String yourBalanceAccount='Your Balance Account';
+  static const String yourBalanceAccount='Balance Account';
   static const String enterYourCode='Enter Your Code';
   static const String lessons='Lessons';
   static const String regsiter='Register';
@@ -44,6 +44,10 @@ class MyTexts {
   static const String loginHere='Login Here';
   static const String registerHere='Register Here.';
   static const String lets="Let's Start";
+  static const String personalInfo='Personal Info';
+  static const String edit='Edit';
+  static const String addCard='Add Card';
+  static const String add='Add';
 
 
 

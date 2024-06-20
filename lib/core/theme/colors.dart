@@ -21,4 +21,6 @@ class MyColors{
   static const verifyCodeScreenBackGroundColo=Color(0xfff6f3f1);
   static const profileIconColor=Color(0xffEEEEEE);
   static const splashBackGroundColor=Color(0xffE1E1E0);
+  static const bottomNavigationBarIconColor=Color(0xff5D61BC);
+  static const skyBlueColor=Color(0xff369BFF);
 }

@@ -9,15 +9,20 @@ import 'package:mario_app/Domain/use_cases/buyLessonUseCase.dart';
 import 'package:mario_app/Domain/use_cases/getLessonsUseCase.dart';
 import 'package:mario_app/Domain/use_cases/getProfileUseCase.dart';
 import 'package:mario_app/Domain/use_cases/redeemCodeUseCase.dart';
+import 'package:mario_app/presentation/add_card/view/add_card_screen.dart';
 import 'package:mario_app/presentation/home/view/home_tab.dart';
 import 'package:mario_app/presentation/main_page/view_model/main_screen_states.dart';
 import 'package:mario_app/presentation/profile/view/profile_tab.dart';
 
 class MainScreenViewModel extends Cubit<MainScreenStates>{
   MainScreenViewModel({required this.redeemCodeUseCase,required this.getProfileUseCase,required this.getLessonsUseCase,required this.buyLessonUseCase}):super(MainScreenInitialState());
-  List<Widget> tabs = const [
-   HomeTab(),
-    ProfileTab()
+  List<Widget> tabs =  [
+  AddCardScreen(),
+    ProfileTab(),
+    HomeTab(),
+    HomeTab(),
+    ProfileTab(),
+
   ];
  int selectedIndex=0;
   final formKey = GlobalKey<FormState>();

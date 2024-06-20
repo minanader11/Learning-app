@@ -27,8 +27,10 @@ class ApiService{
       Uri url = Uri.http(ApiConstants.baseUrl, ApiConstants.grades);
 
       var response =await http.get(url);
+
       var gradeResponse= GradeResponseDto.fromJson(jsonDecode(response.body));
       if(response.statusCode>=200 && response.statusCode <300 ){
+
         return Right(gradeResponse);
       }else{
         return Left(ServerFailure(errMsg: 'not found '));
@@ -58,7 +60,7 @@ class ApiService{
     var connectivityResult = await Connectivity().checkConnectivity(); // User defined class
     if (connectivityResult.contains(ConnectivityResult.mobile) ||
         connectivityResult.contains(ConnectivityResult.wifi)){
-      Uri url = Uri.https(ApiConstants.baseUrl, ApiConstants.register);
+      Uri url = Uri.http(ApiConstants.baseUrl, ApiConstants.register);
       var registerRequest=RegisterRequestDto(name: name,email: email,password: password,phone: phone,parentPhone: parentPhone,centerId: centerID,gradeId: gradeID);
       print(registerRequest.toJson().toString());
       var response =await http.post(url,body: registerRequest.toJson());
@@ -85,7 +87,7 @@ class ApiService{
     var connectivityResult = await Connectivity().checkConnectivity(); // User defined class
     if (connectivityResult.contains(ConnectivityResult.mobile) ||
         connectivityResult.contains(ConnectivityResult.wifi)){
-      Uri url = Uri.https(ApiConstants.baseUrl, ApiConstants.verify);
+      Uri url = Uri.http(ApiConstants.baseUrl, ApiConstants.verify);
       var verifyRequest=VerifyRequestDto(email: email,code: code);
      // print(registerRequest.toJson().toString());
       var response =await http.post(url,body: verifyRequest.toJson());
@@ -112,7 +114,7 @@ class ApiService{
     var connectivityResult = await Connectivity().checkConnectivity(); // User defined class
     if (connectivityResult.contains(ConnectivityResult.mobile) ||
         connectivityResult.contains(ConnectivityResult.wifi)){
-      Uri url = Uri.https(ApiConstants.baseUrl, ApiConstants.login);
+      Uri url = Uri.http(ApiConstants.baseUrl, ApiConstants.login);
       var loginRequest=LoginRequestDto(email: email,password: password,deviceKey: deviceKey);
       // print(registerRequest.toJson().toString());
       var response =await http.post(url,body: loginRequest.toJson());
@@ -139,7 +141,7 @@ class ApiService{
     var connectivityResult = await Connectivity().checkConnectivity(); // User defined class
     if (connectivityResult.contains(ConnectivityResult.mobile) ||
         connectivityResult.contains(ConnectivityResult.wifi)){
-      Uri url = Uri.https(ApiConstants.baseUrl, ApiConstants.redeemCode);
+      Uri url = Uri.http(ApiConstants.baseUrl, ApiConstants.redeemCode);
       var codeRequest=RedeemCodeRequest(code: code);
       // print(registerRequest.toJson().toString());
       var response =await http.post(url,body: codeRequest.toJson(),headers: {
@@ -168,7 +170,7 @@ class ApiService{
     var connectivityResult = await Connectivity().checkConnectivity(); // User defined class
     if (connectivityResult.contains(ConnectivityResult.mobile) ||
         connectivityResult.contains(ConnectivityResult.wifi)){
-      Uri url = Uri.https(ApiConstants.baseUrl, ApiConstants.getProfile);
+      Uri url = Uri.http(ApiConstants.baseUrl, ApiConstants.getProfile);
 
       // print(registerRequest.toJson().toString());
       var response =await http.get(url,headers: {
@@ -197,7 +199,7 @@ class ApiService{
     var connectivityResult = await Connectivity().checkConnectivity(); // User defined class
     if (connectivityResult.contains(ConnectivityResult.mobile) ||
         connectivityResult.contains(ConnectivityResult.wifi)){
-      Uri url = Uri.https(ApiConstants.baseUrl, ApiConstants.getLessons);
+      Uri url = Uri.http(ApiConstants.baseUrl, ApiConstants.getLessons);
 
       // print(registerRequest.toJson().toString());
       var response =await http.get(url,headers: {
@@ -226,7 +228,7 @@ class ApiService{
     var connectivityResult = await Connectivity().checkConnectivity(); // User defined class
     if (connectivityResult.contains(ConnectivityResult.mobile) ||
         connectivityResult.contains(ConnectivityResult.wifi)){
-      Uri url = Uri.https(ApiConstants.baseUrl, ApiConstants.buyLesson);
+      Uri url = Uri.http(ApiConstants.baseUrl, ApiConstants.buyLesson);
 var buyLessonRequest=BuyLessonRequest(lessonId: lessonId);
       // print(registerRequest.toJson().toString());
       var response =await http.post(url,headers: {

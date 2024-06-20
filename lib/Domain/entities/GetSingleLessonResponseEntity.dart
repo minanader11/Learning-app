@@ -1,18 +1,19 @@
+import 'package:mario_app/Domain/entities/LessonResponseEntity.dart';
 import 'package:mario_app/Domain/entities/gradeResponseEntity.dart';
 
-class LessonResponseEntity {
-  LessonResponseEntity({
-      this.lessons,});
+class GetSingleLessonResponseEntity {
+  GetSingleLessonResponseEntity({
+      this.lesson,});
 
 
-  List<LessonEntity>? lessons;
+  SingleLessonResponseEntity? lesson;
 
 
 
 }
 
-class LessonEntity {
-  LessonEntity({
+class SingleLessonResponseEntity {
+  SingleLessonResponseEntity({
       this.id, 
       this.name, 
       this.price, 
@@ -20,9 +21,10 @@ class LessonEntity {
       this.term, 
       this.section, 
       this.grade, 
+      this.isFavourite, 
       this.hasLesson, 
-
-    this.isFavorite,
+      this.lessonVideoUrl, 
+      this.homeworkUrl, 
       this.image,});
 
 
@@ -33,38 +35,13 @@ class LessonEntity {
   TermEntity? term;
   SectionEntity? section;
   GradeEntity? grade;
+  bool? isFavourite;
   bool? hasLesson;
-  bool? isFavorite;
-
+  String? lessonVideoUrl;
+  String? homeworkUrl;
   String? image;
 
 
 
 }
 
-
-
-class SectionEntity {
-  SectionEntity({
-      this.id, 
-      this.name,});
-
-
-  num? id;
-  String? name;
-
-
-}
-
-class TermEntity {
-  TermEntity({
-      this.id, 
-      this.name,});
-
-
-  num? id;
-  String? name;
-
-
-
-}

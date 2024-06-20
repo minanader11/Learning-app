@@ -38,34 +38,17 @@ class MainScreen extends StatelessWidget{
       }
     },
       builder:(context, state) => Scaffold(backgroundColor:MyColors.whiteColor,
-          floatingActionButton: FloatingActionButton( backgroundColor: MyColors.primaryColor,
-              shape: StadiumBorder(
-                side: BorderSide(
-                  color: MyColors.whiteColor,
-                  width: 4,
-                ),
-              ),
-              onPressed: () async {
-                showModalBottomSheet(
 
-                  context: context,
-                  builder: (context) {
-                    return RedeemCodeModalSheet();
-                  },
-                );
-              },
-              child: const Icon(
-                Icons.add_card,
-                color: MyColors.whiteColor,
-              )),
           bottomNavigationBar: BottomAppBar(
             padding: EdgeInsets.zero,
             elevation: 0,
             color: MyColors.lightGreen,
-            shape: const CircularNotchedRectangle(),
-            notchMargin: 8,
-            child: BottomNavigationBar(selectedItemColor: MyColors.primaryColor,
-                backgroundColor: Colors.transparent,
+
+            child: BottomNavigationBar(selectedItemColor: MyColors.bottomNavigationBarIconColor,
+                unselectedItemColor: MyColors.darkGreyColor,
+                backgroundColor:  Color(0x00ffffff),
+
+
                 elevation: 0,
                 onTap: (value) {
                  mainScreenViewModel.changeIndex(value);
@@ -74,7 +57,25 @@ class MainScreen extends StatelessWidget{
                 items: const [
                   BottomNavigationBarItem(
                       icon: Icon(
+                        Icons.add_card,
+                        size: 35,
+                      ),
+                      label: ''),
+                  BottomNavigationBarItem(
+                      icon: Icon(
+                        Icons.favorite,
+                        size: 35,
+                      ),
+                      label: ''),
+                  BottomNavigationBarItem(
+                      icon: Icon(
                         Icons.home,
+                        size: 35,
+                      ),
+                      label: ''),
+                  BottomNavigationBarItem(
+                      icon: Icon(
+                        Icons.shopping_cart_outlined,
                         size: 35,
                       ),
                       label: ''),
@@ -86,7 +87,7 @@ class MainScreen extends StatelessWidget{
                       label: ''),
                 ]),
           ),
-          floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+
           body: mainScreenViewModel.tabs[mainScreenViewModel.selectedIndex]),
     );
   }
