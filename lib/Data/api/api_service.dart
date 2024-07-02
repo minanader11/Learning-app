@@ -253,4 +253,62 @@ var buyLessonRequest=BuyLessonRequest(lessonId: lessonId);
       return Left(NetworkFailure(errMsg: 'Check Your Internet Connection'));
     }
   }
+  Future<Either<Failures,LessonResponseDto>>getFavoriteLessons(String token) async{
+    var connectivityResult = await Connectivity().checkConnectivity(); // User defined class
+    if (connectivityResult.contains(ConnectivityResult.mobile) ||
+        connectivityResult.contains(ConnectivityResult.wifi)){
+      Uri url = Uri.http(ApiConstants.baseUrl, ApiConstants.favoriteLessons);
+
+      // print(registerRequest.toJson().toString());
+      var response =await http.get(url,headers: {
+        'Authorization':'Bearer $token'
+      });
+      var lessonResponse= LessonResponseDto.fromJson(jsonDecode(response.body));
+      print(lessonResponse.toString());
+      print('=========');
+      print(response.body);
+      if(response.statusCode>=200 && response.statusCode <300 ){
+        print('okkkk');
+        // return Right(registerResponse);
+
+        return Right(lessonResponse);
+      }else{
+        print('eroooooor');
+        print(response.body.toString());
+        print(response.statusCode);
+        return Left(ServerFailure(errMsg: 'No Lessons Found'));
+      }
+    } else{
+      return Left(NetworkFailure(errMsg: 'Check Your Internet Connection'));
+    }
+  }
+  Future<Either<Failures,LessonResponseDto>>getBoughtLessons(String token) async{
+    var connectivityResult = await Connectivity().checkConnectivity(); // User defined class
+    if (connectivityResult.contains(ConnectivityResult.mobile) ||
+        connectivityResult.contains(ConnectivityResult.wifi)){
+      Uri url = Uri.http(ApiConstants.baseUrl, ApiConstants.boughtLessons);
+
+      // print(registerRequest.toJson().toString());
+      var response =await http.get(url,headers: {
+        'Authorization':'Bearer $token'
+      });
+      var lessonResponse= LessonResponseDto.fromJson(jsonDecode(response.body));
+      print(lessonResponse.toString());
+      print('=========');
+      print(response.body);
+      if(response.statusCode>=200 && response.statusCode <300 ){
+        print('okkkk');
+        // return Right(registerResponse);
+
+        return Right(lessonResponse);
+      }else{
+        print('eroooooor');
+        print(response.body.toString());
+        print(response.statusCode);
+        return Left(ServerFailure(errMsg: 'No Lessons Found'));
+      }
+    } else{
+      return Left(NetworkFailure(errMsg: 'Check Your Internet Connection'));
+    }
+  }
 }

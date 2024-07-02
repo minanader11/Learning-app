@@ -8,7 +8,9 @@ import 'package:mario_app/Domain/data_source/main_screen_data_source.dart';
 import 'package:mario_app/Domain/repo/authentication_repository.dart';
 import 'package:mario_app/Domain/repo/main_screen_repository.dart';
 import 'package:mario_app/Domain/use_cases/buyLessonUseCase.dart';
+import 'package:mario_app/Domain/use_cases/getBoughtLessonsUseCase.dart';
 import 'package:mario_app/Domain/use_cases/getCentersUseCase.dart';
+import 'package:mario_app/Domain/use_cases/getFavoriteLessonsUseCase.dart';
 import 'package:mario_app/Domain/use_cases/getGradesUseCase.dart';
 import 'package:mario_app/Domain/use_cases/getLessonsUseCase.dart';
 import 'package:mario_app/Domain/use_cases/getProfileUseCase.dart';
@@ -59,4 +61,10 @@ GetLessonsUseCase injectGetLessonsUseCase(){
 }
 BuyLessonUseCase injectBuyLessonUseCase(){
   return BuyLessonUseCase(mainScreenRepository: injectMainScreenRepository());
+}
+GetFavoriteLessonsUseCase injectGetFavoriteLessonsUseCase(){
+  return GetFavoriteLessonsUseCase(mainScreenRepository: injectMainScreenRepository());
+}
+GetBoughtLessonsUseCase injectGetBoughtLessonsUseCase(){
+  return GetBoughtLessonsUseCase(mainScreenRepository: injectMainScreenRepository());
 }

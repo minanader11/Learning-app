@@ -38,4 +38,26 @@ class MainScreenRemoteDataSourceImpl implements MainScreenRemoteDataSource{
   return either.fold((l) => Left(l), (r) => Right(r));
   }
 
+  @override
+  Future<Either<Failures, LessonResponseEntity>> getBoughtLessons(String token)async {
+   var either =await apiService.getBoughtLessons(token);
+   return either.fold((l) {
+     return Left(l);
+   }, (r)
+   {
+     return Right(r);
+   });
+  }
+
+  @override
+  Future<Either<Failures, LessonResponseEntity>> getFavoriteLessons(String token) async{
+    var either =await apiService.getFavoriteLessons(token);
+    return either.fold((l) {
+      return Left(l);
+    }, (r)
+    {
+      return Right(r);
+    });
+  }
+
 }

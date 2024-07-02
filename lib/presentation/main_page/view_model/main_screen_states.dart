@@ -33,7 +33,24 @@ class BuyLessonLoadingState extends MainScreenStates{}
 class BuyLessonErrorState extends MainScreenStates{}
 class ChangeLessonIdInitalState extends MainScreenStates{}
 class ChangeLessonIdSuccessState extends MainScreenStates{}
+class GetFavoriteLessonsInitialState extends MainScreenStates{}
+class GetFavoriteLessonsLoadingState extends MainScreenStates{}
 
+class GetFavoriteLessonsSuccessState extends MainScreenStates{}
+
+class GetFavoriteLessonsFailureState extends MainScreenStates{
+  String errMsg;
+  GetFavoriteLessonsFailureState({required this.errMsg});
+}
+class GetBoughtLessonsInitialState extends MainScreenStates{}
+class GetBoughtLessonsLoadingState extends MainScreenStates{}
+
+class GetBoughtLessonsSuccessState extends MainScreenStates{}
+
+class GetBoughtLessonsFailureState extends MainScreenStates{
+  String errMsg;
+  GetBoughtLessonsFailureState({required this.errMsg});
+}
 
 
 

@@ -31,7 +31,7 @@ void main() async{
     BlocProvider<LoginViewModel>(
       create: (context) => LoginViewModel(loginUseCase: injectLoginUseCase()),
     ),
-    BlocProvider(create: (context) => MainScreenViewModel(redeemCodeUseCase: injectRedeemCodeUseCase(),getProfileUseCase: injectGetProfileUseCase(),getLessonsUseCase: injectGetLessonsUseCase(),buyLessonUseCase: injectBuyLessonUseCase()),)
+    BlocProvider(create: (context) => MainScreenViewModel(redeemCodeUseCase: injectRedeemCodeUseCase(),getProfileUseCase: injectGetProfileUseCase(),getLessonsUseCase: injectGetLessonsUseCase(),buyLessonUseCase: injectBuyLessonUseCase(),getBoughtLessonsUseCase: injectGetBoughtLessonsUseCase(),getFavoriteLessonsUseCase: injectGetFavoriteLessonsUseCase()),)
   ], child: MyApp()));
 }
 
@@ -45,7 +45,7 @@ class MyApp extends StatelessWidget {
       designSize: const Size(375, 812),
       splitScreenMode: true,
       minTextAdapt: true,
-      builder: (context, child) => MaterialApp(
+      builder: (context, child) => MaterialApp(theme: ThemeData(canvasColor: Colors.transparent),
         debugShowCheckedModeBanner: false,
         routes: {
           // SplashScreen.routeName: (context) => SplashScreen(),
@@ -57,7 +57,7 @@ class MyApp extends StatelessWidget {
           Trial.routeName:(context) => Trial(),
           SplashScreen.routeName:(context) => SplashScreen()
         },
-        initialRoute: LoginScreen.routeName,
+        initialRoute: SplashScreen.routeName,
       ),
     );
   }

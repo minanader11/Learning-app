@@ -10,4 +10,6 @@ abstract class MainScreenRemoteDataSource{
   Future<Either<Failures,LoginResponseEntity>>getProfile(String token);
   Future<Either<Failures,LessonResponseEntity>>getLessons(String token);
   Future<Either<Failures,BuyLessonResponseEntity>>buyLesson(String token , String lessonId);
+  Future<Either<Failures,LessonResponseEntity>>getFavoriteLessons(String token);
+  Future<Either<Failures,LessonResponseEntity>>getBoughtLessons(String token);
 }

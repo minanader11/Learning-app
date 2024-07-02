@@ -11,4 +11,6 @@ class ApiConstants {
   static const String getProfile = '/api/auth/profile';
   static const String getLessons = '/api/lessons';
   static const String buyLesson = '/api/lessons/buy';
+  static const String favoriteLessons='/api/favorites';
+  static const String boughtLessons='/api/lessons/my-lessons';
 }

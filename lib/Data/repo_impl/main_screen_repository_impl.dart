@@ -32,4 +32,14 @@ class MainScreenRepoImpl implements MainScreenRepository {
   Future<Either<Failures, BuyLessonResponseEntity>> buyLesson(String token, String lessonId) {
     return mainScreenRemoteDataSource.buyLesson(token, lessonId);
   }
+
+  @override
+  Future<Either<Failures, LessonResponseEntity>> getBoughtLessons(String token) {
+    return mainScreenRemoteDataSource.getBoughtLessons(token);
+  }
+
+  @override
+  Future<Either<Failures, LessonResponseEntity>> getFavoriteLessons(String token) {
+   return mainScreenRemoteDataSource.getFavoriteLessons(token);
+  }
 }

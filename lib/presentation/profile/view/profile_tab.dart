@@ -28,7 +28,7 @@ class ProfileTab extends StatelessWidget {
             );
           } else if (state is GetProfileSuccessState) {
             return Container(
-              margin: EdgeInsets.only(left: 22.w, right: 22.w, top: 70.h),
+              margin: EdgeInsets.only(left: 22.w, right: 22.w, top: 57.h),
               child: SingleChildScrollView(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,

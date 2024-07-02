@@ -9,7 +9,7 @@ import 'package:mario_app/presentation/authentication/login/view_model/login_sta
 
 class LoginViewModel extends Cubit<LoginStates>{
 
-  TextEditingController emailController = TextEditingController(text: 'hubert70@example.com');
+  TextEditingController emailController = TextEditingController(text: 'mina@gmail.com');
   TextEditingController passwordController = TextEditingController(text: '123456');
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
 

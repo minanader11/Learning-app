@@ -6,26 +6,30 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mario_app/Domain/entities/LessonResponseEntity.dart';
 import 'package:mario_app/Domain/entities/LoginResponseEntity.dart';
 import 'package:mario_app/Domain/use_cases/buyLessonUseCase.dart';
+import 'package:mario_app/Domain/use_cases/getBoughtLessonsUseCase.dart';
+import 'package:mario_app/Domain/use_cases/getFavoriteLessonsUseCase.dart';
 import 'package:mario_app/Domain/use_cases/getLessonsUseCase.dart';
 import 'package:mario_app/Domain/use_cases/getProfileUseCase.dart';
 import 'package:mario_app/Domain/use_cases/redeemCodeUseCase.dart';
 import 'package:mario_app/presentation/add_card/view/add_card_screen.dart';
+import 'package:mario_app/presentation/cart/view/cart_tab.dart';
+import 'package:mario_app/presentation/favorite/view/favorite_tab.dart';
 import 'package:mario_app/presentation/home/view/home_tab.dart';
 import 'package:mario_app/presentation/main_page/view_model/main_screen_states.dart';
 import 'package:mario_app/presentation/profile/view/profile_tab.dart';
 
 class MainScreenViewModel extends Cubit<MainScreenStates>{
-  MainScreenViewModel({required this.redeemCodeUseCase,required this.getProfileUseCase,required this.getLessonsUseCase,required this.buyLessonUseCase}):super(MainScreenInitialState());
+  MainScreenViewModel({required this.redeemCodeUseCase,required this.getProfileUseCase,required this.getLessonsUseCase,required this.buyLessonUseCase,required this.getBoughtLessonsUseCase,required this.getFavoriteLessonsUseCase}):super(MainScreenInitialState());
   List<Widget> tabs =  [
   AddCardScreen(),
-    ProfileTab(),
+    FavoriteTab(),
     HomeTab(),
-    HomeTab(),
+    CartTab(),
     ProfileTab(),
 
   ];
- int selectedIndex=0;
-  final formKey = GlobalKey<FormState>();
+ int selectedIndex=2;
+
   TextEditingController codeController=TextEditingController();
  RedeemCodeUseCase redeemCodeUseCase;
  GetProfileUseCase getProfileUseCase;
@@ -33,14 +37,18 @@ class MainScreenViewModel extends Cubit<MainScreenStates>{
   GetLessonsUseCase getLessonsUseCase;
   BuyLessonUseCase buyLessonUseCase;
   List<LessonEntity> lessons=[];
+  List<LessonEntity> favLessons=[];
+  List<LessonEntity> boughtLessons=[];
   num lessonId=0;
+  GetFavoriteLessonsUseCase getFavoriteLessonsUseCase;
+  GetBoughtLessonsUseCase getBoughtLessonsUseCase;
  changeIndex(int newIndex){
    emit(MainScreenInitialState());
    selectedIndex=newIndex;
    emit(ChangeNavigationBarState());
  }
- redeemCode(String token)async{
-   bool validate=  formKey.currentState!.validate();
+ redeemCode(String token,bool validate)async{
+   //bool validate=  formKey.currentState!.validate();
 
    if(validate){
      emit(RedeemCodeLoadingState());
@@ -95,5 +103,29 @@ class MainScreenViewModel extends Cubit<MainScreenStates>{
    emit(ChangeLessonIdSuccessState());
 
  }
+  getFavoriteLessons(String token)async{
+    emit(GetFavoriteLessonsLoadingState());
+    var response= await getFavoriteLessonsUseCase.invoke(token);
+    response.fold((l) {
+      print('get lessons error');
+      emit(GetFavoriteLessonsFailureState(errMsg: l.errMsg));
+    }, (r) {
+      print('success');
+      favLessons=r.lessons!;
+      emit(GetFavoriteLessonsSuccessState());
+    });
+  }
+  getBoughtLessons(String token)async{
+    emit(GetBoughtLessonsLoadingState());
+    var response= await getBoughtLessonsUseCase.invoke(token);
+    response.fold((l) {
+      print('get lessons error');
+      emit(GetBoughtLessonsFailureState(errMsg: l.errMsg));
+    }, (r) {
+      print('success');
+      boughtLessons=r.lessons!;
+      emit(GetBoughtLessonsSuccessState());
+    });
+  }
 
 }
