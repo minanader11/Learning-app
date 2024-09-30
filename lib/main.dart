@@ -9,12 +9,14 @@ import 'package:mario_app/presentation/authentication/register/view/trial_widget
 import 'package:mario_app/presentation/authentication/register/view_model/register_view_model.dart';
 
 import 'package:mario_app/presentation/authentication/verify_code/view/verify_email_view.dart';
+import 'package:mario_app/presentation/lesson_detailed_screen/view/lesson_detailed_screen.dart';
 import 'package:mario_app/presentation/main_page/view/main_screen.dart';
 import 'package:mario_app/presentation/main_page/view_model/main_screen_view_model.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:mario_app/presentation/splash_Screen/splash_Screen.dart';
 import 'firebase_options.dart';
-void main() async{
+
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
@@ -31,7 +33,16 @@ void main() async{
     BlocProvider<LoginViewModel>(
       create: (context) => LoginViewModel(loginUseCase: injectLoginUseCase()),
     ),
-    BlocProvider(create: (context) => MainScreenViewModel(redeemCodeUseCase: injectRedeemCodeUseCase(),getProfileUseCase: injectGetProfileUseCase(),getLessonsUseCase: injectGetLessonsUseCase(),buyLessonUseCase: injectBuyLessonUseCase(),getBoughtLessonsUseCase: injectGetBoughtLessonsUseCase(),getFavoriteLessonsUseCase: injectGetFavoriteLessonsUseCase()),)
+    BlocProvider(
+      create: (context) => MainScreenViewModel(
+          redeemCodeUseCase: injectRedeemCodeUseCase(),
+          getProfileUseCase: injectGetProfileUseCase(),
+          getLessonsUseCase: injectGetLessonsUseCase(),
+          buyLessonUseCase: injectBuyLessonUseCase(),
+          getBoughtLessonsUseCase: injectGetBoughtLessonsUseCase(),
+          getFavoriteLessonsUseCase: injectGetFavoriteLessonsUseCase(),
+      getSingleLessonUseCase: injectGetSingleLessonUseCase()),
+    )
   ], child: MyApp()));
 }
 
@@ -45,7 +56,8 @@ class MyApp extends StatelessWidget {
       designSize: const Size(375, 812),
       splitScreenMode: true,
       minTextAdapt: true,
-      builder: (context, child) => MaterialApp(theme: ThemeData(canvasColor: Colors.transparent),
+      builder: (context, child) => MaterialApp(
+        theme: ThemeData(canvasColor: Colors.transparent),
         debugShowCheckedModeBanner: false,
         routes: {
           // SplashScreen.routeName: (context) => SplashScreen(),
@@ -54,8 +66,9 @@ class MyApp extends StatelessWidget {
           RegisterScreen.routeName: (context) => RegisterScreen(),
           // MainScreen.routeName: (context) => MainScreen(),
           VerifyEmailScreen.routeName: (context) => VerifyEmailScreen(),
-          Trial.routeName:(context) => Trial(),
-          SplashScreen.routeName:(context) => SplashScreen()
+          Trial.routeName: (context) => Trial(),
+          SplashScreen.routeName: (context) => SplashScreen(),
+          LessonDetailedScreen.routeName:(context) => LessonDetailedScreen(),
         },
         initialRoute: SplashScreen.routeName,
       ),

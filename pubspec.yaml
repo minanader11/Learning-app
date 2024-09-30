@@ -50,6 +50,8 @@ dependencies:
   percent_indicator: ^4.2.3
   bloc: ^8.1.4
   flutter_svg: ^2.0.10+1
+  pod_player: ^0.2.1
+  google_sign_in: ^6.2.1
 
 dev_dependencies:
   flutter_test:

@@ -5,6 +5,7 @@ import 'package:dartz/dartz.dart';
 import 'package:mario_app/Data/api/api_constants.dart';
 import 'package:mario_app/Data/model/BuyLessonResponseDto.dart';
 import 'package:mario_app/Data/model/CentersResponseDto.dart';
+import 'package:mario_app/Data/model/GetSingleLessonResponseDto.dart';
 import 'package:mario_app/Data/model/GradeResponseDto.dart';
 import 'package:mario_app/Data/model/LessonResponseDto.dart';
 import 'package:mario_app/Data/model/LoginResponseDto.dart';
@@ -293,6 +294,35 @@ var buyLessonRequest=BuyLessonRequest(lessonId: lessonId);
         'Authorization':'Bearer $token'
       });
       var lessonResponse= LessonResponseDto.fromJson(jsonDecode(response.body));
+      print(lessonResponse.toString());
+      print('=========');
+      print(response.body);
+      if(response.statusCode>=200 && response.statusCode <300 ){
+        print('okkkk');
+        // return Right(registerResponse);
+
+        return Right(lessonResponse);
+      }else{
+        print('eroooooor');
+        print(response.body.toString());
+        print(response.statusCode);
+        return Left(ServerFailure(errMsg: 'No Lessons Found'));
+      }
+    } else{
+      return Left(NetworkFailure(errMsg: 'Check Your Internet Connection'));
+    }
+  }
+  Future<Either<Failures,GetSingleLessonResponseDto>>getSingleLessons(String token,String lessonId) async{
+    var connectivityResult = await Connectivity().checkConnectivity(); // User defined class
+    if (connectivityResult.contains(ConnectivityResult.mobile) ||
+        connectivityResult.contains(ConnectivityResult.wifi)){
+      Uri url = Uri.http(ApiConstants.baseUrl, '${ApiConstants.getLessons}/$lessonId');
+
+      // print(registerRequest.toJson().toString());
+      var response =await http.get(url,headers: {
+        'Authorization':'Bearer $token'
+      });
+      var lessonResponse= GetSingleLessonResponseDto.fromJson(jsonDecode(response.body));
       print(lessonResponse.toString());
       print('=========');
       print(response.body);

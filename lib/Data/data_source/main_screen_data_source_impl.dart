@@ -1,6 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:mario_app/Data/api/api_service.dart';
 import 'package:mario_app/Domain/data_source/main_screen_data_source.dart';
+import 'package:mario_app/Domain/entities/GetSingleLessonResponseEntity.dart';
 import 'package:mario_app/Domain/entities/LessonResponseEntity.dart';
 import 'package:mario_app/Domain/entities/LoginResponseEntity.dart';
 import 'package:mario_app/Domain/entities/RedeemCodeResponseEntity.dart';
@@ -56,6 +57,16 @@ class MainScreenRemoteDataSourceImpl implements MainScreenRemoteDataSource{
       return Left(l);
     }, (r)
     {
+      return Right(r);
+    });
+  }
+
+  @override
+  Future<Either<Failures, GetSingleLessonResponseEntity>> getSingleLessons(String token, String lessonId) async{
+    var either=await apiService.getSingleLessons(token, lessonId);
+    return either.fold((l) {
+      return Left(l);
+    }, (r)  {
       return Right(r);
     });
   }

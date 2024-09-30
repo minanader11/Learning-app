@@ -5,6 +5,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mario_app/Domain/entities/LessonResponseEntity.dart';
 import 'package:mario_app/core/texts.dart';
 import 'package:mario_app/core/theme/colors.dart';
+import 'package:mario_app/presentation/authentication/login/view_model/login_view_model.dart';
+import 'package:mario_app/presentation/lesson_detailed_screen/view/lesson_detailed_screen.dart';
 import 'package:mario_app/presentation/main_page/view_model/main_screen_view_model.dart';
 
 class LessonItem extends StatelessWidget {
@@ -14,6 +16,7 @@ class LessonItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var loginCubit=BlocProvider.of<LoginViewModel>(context);
     MainScreenViewModel mainScreenViewModel =
     BlocProvider.of<MainScreenViewModel>(context);
 
@@ -24,7 +27,11 @@ class LessonItem extends StatelessWidget {
         // ));
         if(lesson.hasLesson == false){
         mainScreenViewModel.requestBuyLesson();
-        mainScreenViewModel.changeLessonID(lesson.id!);}
+        mainScreenViewModel.changeLessonID(lesson.id!);
+        } else{
+          mainScreenViewModel.getSingleLesson(loginCubit.token, lesson.id.toString());
+          Navigator.of(context).pushNamed(LessonDetailedScreen.routeName);
+        }
       },
       child: Card(
         child: Container(

@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart';
+import 'package:mario_app/Domain/entities/GetSingleLessonResponseEntity.dart';
 import 'package:mario_app/Domain/entities/LessonResponseEntity.dart';
 import 'package:mario_app/Domain/entities/LoginResponseEntity.dart';
 import 'package:mario_app/Domain/entities/RedeemCodeResponseEntity.dart';
@@ -12,4 +13,5 @@ abstract class MainScreenRemoteDataSource{
   Future<Either<Failures,BuyLessonResponseEntity>>buyLesson(String token , String lessonId);
   Future<Either<Failures,LessonResponseEntity>>getFavoriteLessons(String token);
   Future<Either<Failures,LessonResponseEntity>>getBoughtLessons(String token);
+  Future<Either<Failures,GetSingleLessonResponseEntity>>getSingleLessons(String token,String lessonId);
 }

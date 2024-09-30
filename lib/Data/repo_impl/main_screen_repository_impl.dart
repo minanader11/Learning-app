@@ -1,5 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:mario_app/Domain/data_source/main_screen_data_source.dart';
+import 'package:mario_app/Domain/entities/GetSingleLessonResponseEntity.dart';
 import 'package:mario_app/Domain/entities/LessonResponseEntity.dart';
 import 'package:mario_app/Domain/entities/LoginResponseEntity.dart';
 import 'package:mario_app/Domain/entities/RedeemCodeResponseEntity.dart';
@@ -41,5 +42,10 @@ class MainScreenRepoImpl implements MainScreenRepository {
   @override
   Future<Either<Failures, LessonResponseEntity>> getFavoriteLessons(String token) {
    return mainScreenRemoteDataSource.getFavoriteLessons(token);
+  }
+
+  @override
+  Future<Either<Failures, GetSingleLessonResponseEntity>> getSingleLessons(String token, String lessonId) {
+    return mainScreenRemoteDataSource.getSingleLessons(token, lessonId);
   }
 }

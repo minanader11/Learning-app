@@ -51,6 +51,15 @@ class GetBoughtLessonsFailureState extends MainScreenStates{
   String errMsg;
   GetBoughtLessonsFailureState({required this.errMsg});
 }
+class ChangeTabInitialState extends MainScreenStates{}
+class ChangeTabSuccessState extends MainScreenStates{}
+class GetSingleLessonLoadingState extends MainScreenStates{}
+class GetSingleLessonSuccessState extends MainScreenStates{}
+class GetSingleLessonFailureState extends MainScreenStates{
+  String errMsg;
+  GetSingleLessonFailureState({required this.errMsg});
+}
+
 
 
 

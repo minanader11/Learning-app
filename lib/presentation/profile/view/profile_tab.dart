@@ -29,55 +29,56 @@ class ProfileTab extends StatelessWidget {
           } else if (state is GetProfileSuccessState) {
             return Container(
               margin: EdgeInsets.only(left: 22.w, right: 22.w, top: 57.h),
-              child: SingleChildScrollView(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            MyTexts.personalInfo,
-                            style: Styles.textStyle20,
-                          ),
-                          Text(
-                            MyTexts.edit,
-                            style: Styles.textStyle20.copyWith(
-                                decoration: TextDecoration.underline,
-                                color: MyColors.purpleColor),
-                          )
-                        ],
+                      Text(
+                        MyTexts.personalInfo,
+                        style: Styles.textStyle20,
                       ),
+                      Text(
+                        MyTexts.edit,
+                        style: Styles.textStyle20.copyWith(
+                            decoration: TextDecoration.underline,
+                            color: MyColors.purpleColor),
+                      )
+                    ],
+                  ),
+                  SizedBox(
+                    height: 50.h,
+                  ),
+                  Row(
+                    children: [
+                      // SvgPicture.asset(
+                      //   ImagePaths.profileAvatar,
+                      //   height: 105.h,
+                      //   width: 105.w,
+                      // ),
+                      Container(width: 105.w,
+                        height: 105.h,
+                        decoration: BoxDecoration(shape: BoxShape.circle,color: MyColors.greyColor),
+                        child: Icon(Icons.person,color: MyColors.purpleColor,size: 60.h,),),
                       SizedBox(
-                        height: 50.h,
+                        width: 29.w,
                       ),
-                      Row(
-                        children: [
-                          // SvgPicture.asset(
-                          //   ImagePaths.profileAvatar,
-                          //   height: 105.h,
-                          //   width: 105.w,
-                          // ),
-                          Container(width: 105.w,
-                            height: 105.h,
-                            decoration: BoxDecoration(shape: BoxShape.circle,color: MyColors.greyColor),
-                            child: Icon(Icons.person,color: MyColors.purpleColor,size: 60.h,),),
-                          SizedBox(
-                            width: 29.w,
-                          ),
-                          Text(
-                            mainScreenViewModel.user.name ?? '',
-                            style: Styles.textStyle20,
-                          )
-                        ],
-                      ),
-                      SizedBox(
-                        height: 28.h,
-                      ),
-                      Container(padding: EdgeInsets.only(left: 20.w, top: 20.h),
-                        decoration:
-                        BoxDecoration(
-                            borderRadius: BorderRadius.circular(20.r)),
+                      Text(
+                        mainScreenViewModel.user.name ?? '',
+                        style: Styles.textStyle20,
+                      )
+                    ],
+                  ),
+                  SizedBox(
+                    height: 10.h,
+                  ),
+                  Expanded(
+                    child: Container(margin: EdgeInsets.only(bottom: 35.h),padding: EdgeInsets.only(left: 20.w, top: 20.h,bottom: 10.h),
+                      decoration:
+                      BoxDecoration(color: Colors.white,
+                          borderRadius: BorderRadius.circular(20.r)),
+                      child: SingleChildScrollView(
                         child: Column(children: [
                           CustomInfoItem(
                               icon: Icons.email,
@@ -122,11 +123,11 @@ class ProfileTab extends StatelessWidget {
                               info: '${mainScreenViewModel.user.balance} EGP'),
                         ]),
                       ),
-                      SizedBox(
-                        height: 24.h,
-                      ),
-                    ],
-                  )),
+                    ),
+                  ),
+                  SizedBox(height: 15.h,)
+                ],
+              ),
             );
           } else {
             return Container();

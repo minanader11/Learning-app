@@ -21,13 +21,14 @@ class MainScreen extends StatelessWidget {
           decoration: BoxDecoration(gradient: LinearGradient(end: Alignment.bottomCenter,colors: [Colors.white,MyColors.greyColor,],begin: Alignment.topCenter)),
           child: Column(
             children: [
-              Spacer(),
+         Spacer(),
+
               ClipPath(
                   clipper: MainScreenCustomClipPath(),
                   child: Container(
 
                     color: Colors.white,
-                    height: 130.h,
+                    height: 150.h,
                     width: double.infinity,
                   ))
             ],
@@ -46,6 +47,7 @@ class MainScreen extends StatelessWidget {
                   elevation: 0,
                   onTap: (value) {
                     mainScreenViewModel.changeIndex(value);
+
                   },
                   currentIndex: mainScreenViewModel.selectedIndex,
                   items: const [
@@ -81,7 +83,8 @@ class MainScreen extends StatelessWidget {
                         label: ''),
                   ]),
             ),
-            body: mainScreenViewModel.tabs[mainScreenViewModel.selectedIndex]),
+           body:  mainScreenViewModel.tabs[mainScreenViewModel.selectedIndex],
+        ),
       ]),
     );
   }

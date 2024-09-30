@@ -78,7 +78,7 @@ class FavoriteTab extends StatelessWidget{
                 //     ),
                 //   ),
                 // );
-                return Expanded(child:ListView.builder(itemBuilder:(context, index) =>  ShimmerLoading(width: 360.w,height: 310.h,)));
+                return Expanded(child:ListView.builder(itemCount: 1,itemBuilder:(context, index) =>  ShimmerLoading(width: 360.w,height: 310.h,)));
               } else if (state is GetFavoriteLessonsFailureState) {
                 return Center(
                   child: Text(
@@ -93,7 +93,8 @@ class FavoriteTab extends StatelessWidget{
                 );
               }
             },
-          )
+          ),
+          SizedBox(height: 50.h,)
         ],
       ),
     );

@@ -14,6 +14,7 @@ import 'package:mario_app/Domain/use_cases/getFavoriteLessonsUseCase.dart';
 import 'package:mario_app/Domain/use_cases/getGradesUseCase.dart';
 import 'package:mario_app/Domain/use_cases/getLessonsUseCase.dart';
 import 'package:mario_app/Domain/use_cases/getProfileUseCase.dart';
+import 'package:mario_app/Domain/use_cases/getSingleLessonUseCase.dart';
 import 'package:mario_app/Domain/use_cases/loginUseCase.dart';
 import 'package:mario_app/Domain/use_cases/redeemCodeUseCase.dart';
 import 'package:mario_app/Domain/use_cases/registerUseCase.dart';
@@ -67,4 +68,7 @@ GetFavoriteLessonsUseCase injectGetFavoriteLessonsUseCase(){
 }
 GetBoughtLessonsUseCase injectGetBoughtLessonsUseCase(){
   return GetBoughtLessonsUseCase(mainScreenRepository: injectMainScreenRepository());
+}
+GetSingleLessonUseCase injectGetSingleLessonUseCase(){
+  return GetSingleLessonUseCase(mainScreenRepository: injectMainScreenRepository());
 }
