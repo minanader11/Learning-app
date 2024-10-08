@@ -52,7 +52,8 @@ dependencies:
   flutter_svg: ^2.0.10+1
   pod_player: ^0.2.1
   google_sign_in: ^6.2.1
-
+  gif_view:
+  lottie:
 dev_dependencies:
   flutter_test:
     sdk: flutter

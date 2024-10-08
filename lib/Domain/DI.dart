@@ -16,6 +16,7 @@ import 'package:mario_app/Domain/use_cases/getLessonsUseCase.dart';
 import 'package:mario_app/Domain/use_cases/getProfileUseCase.dart';
 import 'package:mario_app/Domain/use_cases/getSingleLessonUseCase.dart';
 import 'package:mario_app/Domain/use_cases/loginUseCase.dart';
+import 'package:mario_app/Domain/use_cases/loginWithGmailUseCase.dart';
 import 'package:mario_app/Domain/use_cases/redeemCodeUseCase.dart';
 import 'package:mario_app/Domain/use_cases/registerUseCase.dart';
 import 'package:mario_app/Domain/use_cases/verifyUseCase.dart';
@@ -71,4 +72,7 @@ GetBoughtLessonsUseCase injectGetBoughtLessonsUseCase(){
 }
 GetSingleLessonUseCase injectGetSingleLessonUseCase(){
   return GetSingleLessonUseCase(mainScreenRepository: injectMainScreenRepository());
+}
+LoginWithGmailUseCase injectLoginWithGmailUseCase(){
+  return LoginWithGmailUseCase(authRepository: injectAuthRepository());
 }

@@ -1,5 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:mario_app/Domain/data_source/authentication_data_source.dart';
+import 'package:mario_app/Domain/entities/GoogleSignInResponseEntity.dart';
 import 'package:mario_app/Domain/entities/LoginResponseEntity.dart';
 import 'package:mario_app/Domain/entities/RegisterResponseEntity.dart';
 import 'package:mario_app/Domain/entities/VerifyEmailResponseEntity.dart';
@@ -34,6 +35,11 @@ class AuthRepositoryImpl implements AuthRepository{
   @override
   Future<Either<Failures, LoginResponseEntity>> login(String email, String password,String deviceKey) {
     return authRemoteDataSource.login(email, password,deviceKey);
+  }
+
+  @override
+  Future<Either<Failures, GoogleSignInResponseEntity>> loginWithGmail(String accessToken) {
+return authRemoteDataSource.loginWithGmail(accessToken);
   }
 
 }

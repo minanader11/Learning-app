@@ -31,7 +31,7 @@ void main() async {
         ..getCenters(),
     ),
     BlocProvider<LoginViewModel>(
-      create: (context) => LoginViewModel(loginUseCase: injectLoginUseCase()),
+      create: (context) => LoginViewModel(loginUseCase: injectLoginUseCase(),loginWithGmailUseCase: injectLoginWithGmailUseCase()),
     ),
     BlocProvider(
       create: (context) => MainScreenViewModel(

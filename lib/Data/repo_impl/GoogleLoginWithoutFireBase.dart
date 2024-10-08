@@ -44,6 +44,10 @@ class GoogleLoginWithoutFirebase{
 //If you want further information about Google accounts, such as authentication, use this.
     final GoogleSignInAuthentication googleAuthentication = await googleAccount!.authentication;
     print("${googleAccount.email}email");
+   print("${googleAuthentication.idToken}idToken");
+   print("${googleAuthentication.accessToken}accessToken");
+   print("${googleAccount.email}email");
+   print("${googleAccount.email}email");
     return googleAuthentication;
   }
 }

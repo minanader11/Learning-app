@@ -6,6 +6,7 @@ import 'package:mario_app/Data/api/api_constants.dart';
 import 'package:mario_app/Data/model/BuyLessonResponseDto.dart';
 import 'package:mario_app/Data/model/CentersResponseDto.dart';
 import 'package:mario_app/Data/model/GetSingleLessonResponseDto.dart';
+import 'package:mario_app/Data/model/GoogleSignInResponseDto.dart';
 import 'package:mario_app/Data/model/GradeResponseDto.dart';
 import 'package:mario_app/Data/model/LessonResponseDto.dart';
 import 'package:mario_app/Data/model/LoginResponseDto.dart';
@@ -15,6 +16,7 @@ import 'package:mario_app/Data/model/VerifyResponseDto.dart';
 import 'package:mario_app/Data/model/request/LoginRequestDto.dart';
 import 'package:mario_app/Data/model/request/RedeemCodeRequest.dart';
 import 'package:mario_app/Data/model/request/RegsiterRequestDto.dart';
+import 'package:mario_app/Data/model/request/SocialSignRequestDto.dart';
 import 'package:mario_app/Data/model/request/VerifyRequestDto.dart';
 import 'package:mario_app/Data/model/request/buyLessoneRequest.dart';
 import 'package:mario_app/Domain/entities/RedeemCodeResponseEntity.dart';
@@ -120,6 +122,33 @@ class ApiService{
       // print(registerRequest.toJson().toString());
       var response =await http.post(url,body: loginRequest.toJson());
       var loginResponse= LoginResponseDto.fromJson(jsonDecode(response.body));
+      // print(registerResponse.toString());
+      // print('=========');
+      // print(response.body);
+      if(response.statusCode>=200 && response.statusCode <300 ){
+        print('okkkk');
+        // return Right(registerResponse);
+
+        return Right(loginResponse);
+      }else{
+        print('eroooooor');
+        print(response.body.toString());
+        print(response.statusCode);
+        return Left(ServerFailure(errMsg: loginResponse.message!));
+      }
+    } else{
+      return Left(NetworkFailure(errMsg: 'Check Your Internet Connection'));
+    }
+  }
+  Future<Either<Failures,GoogleSignInResponseDto>>loginWithGmail(String accessToken) async{
+    var connectivityResult = await Connectivity().checkConnectivity(); // User defined class
+    if (connectivityResult.contains(ConnectivityResult.mobile) ||
+        connectivityResult.contains(ConnectivityResult.wifi)){
+      Uri url = Uri.http(ApiConstants.baseUrl, ApiConstants.googleSignIn);
+      var loginRequest=SocialSignRequestDto(provider: "google",accessToken: accessToken);
+      // print(registerRequest.toJson().toString());
+      var response =await http.post(url,body: loginRequest.toJson());
+      var loginResponse= GoogleSignInResponseDto.fromJson(jsonDecode(response.body));
       // print(registerResponse.toString());
       // print('=========');
       // print(response.body);
