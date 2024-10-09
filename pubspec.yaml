@@ -54,6 +54,7 @@ dependencies:
   google_sign_in: ^6.2.1
   gif_view:
   lottie:
+  encrypt_shared_preferences:
 dev_dependencies:
   flutter_test:
     sdk: flutter
