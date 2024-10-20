@@ -50,11 +50,13 @@ dependencies:
   percent_indicator: ^4.2.3
   bloc: ^8.1.4
   flutter_svg: ^2.0.10+1
-  pod_player: ^0.2.1
+
   google_sign_in: ^6.2.1
   gif_view:
   lottie:
   encrypt_shared_preferences:
+  youtube_explode_dart: ^2.3.0
+  youtube_player_flutter: ^8.1.2
 dev_dependencies:
   flutter_test:
     sdk: flutter

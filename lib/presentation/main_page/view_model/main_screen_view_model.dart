@@ -16,7 +16,8 @@ import 'package:mario_app/presentation/favorite/view/favorite_tab.dart';
 import 'package:mario_app/presentation/home/view/home_tab.dart';
 import 'package:mario_app/presentation/main_page/view_model/main_screen_states.dart';
 import 'package:mario_app/presentation/profile/view/profile_tab.dart';
-import 'package:pod_player/pod_player.dart';
+
+import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 class MainScreenViewModel extends Cubit<MainScreenStates> {
   MainScreenViewModel(
@@ -36,7 +37,7 @@ class MainScreenViewModel extends Cubit<MainScreenStates> {
     ProfileTab(),
   ];
   int selectedIndex = 2;
-  PodPlayerController? controller;
+
   TextEditingController codeController = TextEditingController();
   RedeemCodeUseCase redeemCodeUseCase;
   GetProfileUseCase getProfileUseCase;
@@ -52,7 +53,12 @@ class MainScreenViewModel extends Cubit<MainScreenStates> {
   Widget? tab;
   GetSingleLessonUseCase getSingleLessonUseCase;
   SingleLessonResponseEntity lesson=SingleLessonResponseEntity();
-
+  YoutubePlayerController? youtubeController;
+  var _idController = TextEditingController();
+  var _seekToController = TextEditingController();
+  var _videoMetaData = const YoutubeMetaData();
+  var _playerState = PlayerState.unknown;
+  bool _isPlayerReady = false;
   changeIndex(int newIndex) {
     emit(MainScreenInitialState());
     selectedIndex = newIndex;
@@ -156,11 +162,34 @@ class MainScreenViewModel extends Cubit<MainScreenStates> {
       emit(GetSingleLessonFailureState(errMsg: l.errMsg));
     }, (r) {
       lesson=r.lesson!;
-      controller = PodPlayerController(
-        playVideoFrom:
-        PlayVideoFrom.youtube(lesson.lessonVideoUrl!),
-      )..initialise();
+      print("lesson ${lesson.lessonVideoUrl}");
+      String videoId;
+     youtubeController = YoutubePlayerController(
+        initialVideoId: getYoutubeVideoId(lesson!.lessonVideoUrl!)!,
+        flags: YoutubePlayerFlags(
+          autoPlay: true,
+          mute: false,
+        ),
+      )..addListener(listener);
       emit(GetSingleLessonSuccessState());
+
     });
+  }
+  String? getYoutubeVideoId(String url) {
+    final uri = Uri.parse(url);
+    if (uri.host.contains('youtu.be')) {
+      return uri.pathSegments.isNotEmpty ? uri.pathSegments.first : null;
+    } else if (uri.queryParameters.containsKey('v')) {
+      return uri.queryParameters['v'];
+    }
+    return null;
+  }
+  void listener() {
+    if (_isPlayerReady  && !youtubeController!.value.isFullScreen) {
+      print("enterrrrr");
+        _playerState = youtubeController!.value.playerState;
+        _videoMetaData = youtubeController!.metadata;
+       
+    }
   }
 }
