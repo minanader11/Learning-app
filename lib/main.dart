@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:mario_app/Domain/DI.dart';
 import 'package:mario_app/presentation/authentication/login/view/login_Screen.dart';
 import 'package:mario_app/presentation/authentication/login/view_model/login_view_model.dart';
@@ -15,12 +16,19 @@ import 'package:mario_app/presentation/main_page/view_model/main_screen_view_mod
 import 'package:firebase_core/firebase_core.dart';
 import 'package:mario_app/presentation/splash_Screen/splash_Screen.dart';
 import 'firebase_options.dart';
-
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+  Stripe.publishableKey = "pk_test_51QBub9Ez0AR5aTDO0scfoAnOhSdf685PVUlP8TLQDpTmEAHStLRqasFcgumePUwzc5wy96bagdJGOxux7B1ttrCX00DdUQFCL3";
+// to load secret key from .env file
+  Stripe.merchantIdentifier = 'merchant.flutter.stripe.test';
+  Stripe.urlScheme = 'flutterstripe';
+
+  await dotenv.load(fileName: "assets/.env");
+  await Stripe.instance.applySettings();
   runApp(MultiBlocProvider(providers: [
     BlocProvider<RegisterViewModel>(
       create: (context) => RegisterViewModel(

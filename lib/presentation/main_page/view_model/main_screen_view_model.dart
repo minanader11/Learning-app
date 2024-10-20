@@ -1,5 +1,8 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:mario_app/Domain/entities/GetSingleLessonResponseEntity.dart';
 import 'package:mario_app/Domain/entities/LessonResponseEntity.dart';
 import 'package:mario_app/Domain/entities/LoginResponseEntity.dart';
@@ -18,7 +21,7 @@ import 'package:mario_app/presentation/main_page/view_model/main_screen_states.d
 import 'package:mario_app/presentation/profile/view/profile_tab.dart';
 
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
-
+import 'package:http/http.dart' as http;
 class MainScreenViewModel extends Cubit<MainScreenStates> {
   MainScreenViewModel(
       {required this.redeemCodeUseCase,
@@ -59,6 +62,8 @@ class MainScreenViewModel extends Cubit<MainScreenStates> {
   var _videoMetaData = const YoutubeMetaData();
   var _playerState = PlayerState.unknown;
   bool _isPlayerReady = false;
+  var  paymentController = TextEditingController();
+  Map<String, dynamic>? paymentIntentData;
   changeIndex(int newIndex) {
     emit(MainScreenInitialState());
     selectedIndex = newIndex;
@@ -190,6 +195,78 @@ class MainScreenViewModel extends Cubit<MainScreenStates> {
         _playerState = youtubeController!.value.playerState;
         _videoMetaData = youtubeController!.metadata;
        
+    }
+  }
+  Future<void> makePayment(
+      {required String amount, required String currency}) async {
+    try {
+      emit(PaymentLoadingState());
+      paymentIntentData = await createPaymentIntent(amount, currency);
+      const gpay = PaymentSheetGooglePay(
+        merchantCountryCode: "US",
+        currencyCode: "USD",
+        testEnv: true,
+      );
+      if (paymentIntentData != null) {
+        await Stripe.instance.initPaymentSheet(
+          paymentSheetParameters: SetupPaymentSheetParameters(
+            // applePay: const PaymentSheetApplePay(
+            //   buttonType: PlatformButtonType.buy,
+            //   merchantCountryCode: 'US',
+            // ),
+          //  googlePay: gpay,
+            merchantDisplayName: 'Adiwele',
+            paymentIntentClientSecret: paymentIntentData!['client_secret'],
+            customerEphemeralKeySecret: paymentIntentData!['ephemeralKey'],
+
+          ),
+        );
+
+        displayPaymentSheet();
+
+      }
+
+    } catch (e, s) {
+      print('exception:$e$s');
+      emit(PaymentFailureState(errMsg: e.toString()));
+    }
+  }
+  createPaymentIntent(String amount, String currency) async {
+    try {
+      Map<String, dynamic> body = {
+        'amount': amount,
+        'currency': currency,
+        'payment_method_types[]': 'card'
+      };
+      var response = await http.post(
+        Uri.parse('https://api.stripe.com/v1/payment_intents'),
+        body: body,
+        headers: {
+          'Authorization': 'Bearer sk_test_51QBub9Ez0AR5aTDOMStaWfLpjHqHtZZyNPXG38LGha5XUX50UaWbyovZ6lOgwnoonjiNLuqwIc65ENedrf6yRjXl005lWXYVcO',
+          'Content-Type': 'application/x-www-form-urlencoded'
+        },
+      );
+
+      return jsonDecode(response.body.toString());
+    } catch (e) {
+      print(e.toString());
+    }
+  }
+  displayPaymentSheet() async {
+    try {
+      await Stripe.instance.presentPaymentSheet().then(
+            (value) {
+              print("mina");
+              emit(PaymentSuccessState());
+            },
+      );
+
+    } on StripeException catch (e) {
+      print('Payment failed: ${e.error.localizedMessage}');
+      emit(PaymentFailureState(errMsg: e.error.localizedMessage!));
+    } catch (e) {
+      print('An unexpected error occurred: $e');
+      emit(PaymentFailureState(errMsg: e.toString()));
     }
   }
 }

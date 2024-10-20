@@ -59,7 +59,12 @@ class GetSingleLessonFailureState extends MainScreenStates{
   String errMsg;
   GetSingleLessonFailureState({required this.errMsg});
 }
-
+class PaymentLoadingState extends MainScreenStates{}
+class PaymentSuccessState extends MainScreenStates{}
+class PaymentFailureState extends MainScreenStates{
+  String errMsg;
+  PaymentFailureState({required this.errMsg});
+}
 
 
 

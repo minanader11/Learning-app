@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:mario_app/core/imagePaths.dart';
 import 'package:mario_app/core/texts.dart';
@@ -125,7 +126,8 @@ class ProfileTab extends StatelessWidget {
                       ),
                     ),
                   ),
-                  SizedBox(height: 15.h,)
+                  SizedBox(height: 15.h,),
+
                 ],
               ),
             );
