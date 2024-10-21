@@ -210,12 +210,12 @@ class MainScreenViewModel extends Cubit<MainScreenStates> {
       if (paymentIntentData != null) {
         await Stripe.instance.initPaymentSheet(
           paymentSheetParameters: SetupPaymentSheetParameters(
-            // applePay: const PaymentSheetApplePay(
-            //   buttonType: PlatformButtonType.buy,
-            //   merchantCountryCode: 'US',
-            // ),
-          //  googlePay: gpay,
-            merchantDisplayName: 'Adiwele',
+            applePay: const PaymentSheetApplePay(
+              buttonType: PlatformButtonType.buy,
+              merchantCountryCode: 'US',
+            ),
+           googlePay: gpay,
+            merchantDisplayName: 'mina nader',
             paymentIntentClientSecret: paymentIntentData!['client_secret'],
             customerEphemeralKeySecret: paymentIntentData!['ephemeralKey'],
 
