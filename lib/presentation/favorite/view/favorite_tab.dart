@@ -11,12 +11,13 @@ import 'package:mario_app/presentation/main_page/view_model/main_screen_view_mod
 import 'package:mario_app/presentation/utils/dialog_utils.dart';
 import 'package:mario_app/presentation/utils/shimmer.dart';
 
-class FavoriteTab extends StatelessWidget{
+class FavoriteTab extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var loginBloc = BlocProvider.of<LoginViewModel>(context);
     MainScreenViewModel mainScreenViewModel =
-    BlocProvider.of<MainScreenViewModel>(context)..getFavoriteLessons(loginBloc.token);
+        BlocProvider.of<MainScreenViewModel>(context)
+          ..getFavoriteLessons(loginBloc.token);
     return Container(
       margin: EdgeInsets.only(left: 16.w, right: 16.w, top: 50.h),
       child: Column(
@@ -33,42 +34,44 @@ class FavoriteTab extends StatelessWidget{
           SizedBox(
             height: 10.h,
           ),
-          BlocConsumer<MainScreenViewModel, MainScreenStates>(listener: (context, state) {
-            if(state is BuyLessonRequestState){
-              DialogUtils.showMessage(
-                  context: context,
-                  message: "You Don't have this lesson do you want to buy it ",
-                  actionName: 'ok',
-                  posActionFun: () {
-                    mainScreenViewModel.buyLesson(loginBloc.token, mainScreenViewModel.lessonId.toString());
-                    // mainScreenViewModel.getLessons(loginBloc.token);
-                  });
-            } else if(state is BuyLessonSuccessState ){
-              DialogUtils.hideLoading(context);
+          BlocConsumer<MainScreenViewModel, MainScreenStates>(
+            listener: (context, state) {
+              if (state is BuyLessonRequestState) {
+                DialogUtils.showMessage(
+                    context: context,
+                    message:
+                        "You Don't have this lesson do you want to buy it ",
+                    actionName: 'ok',
+                    posActionFun: () {
+                      mainScreenViewModel.buyLesson(loginBloc.token,
+                          mainScreenViewModel.lessonId.toString());
+                      // mainScreenViewModel.getLessons(loginBloc.token);
+                    });
+              } else if (state is BuyLessonSuccessState) {
+                DialogUtils.hideLoading(context);
 
-              DialogUtils.showMessage(
-                  context: context,
-                  message: "You bought Lesson  ",
-                  actionName: 'ok',
-                  posActionFun: () {
-                    Navigator.of(context).pop();
-                    mainScreenViewModel.getFavoriteLessons(loginBloc.token);
-                  });
-
-            } else if(state is BuyLessonErrorState){
-              DialogUtils.hideLoading(context);
-              DialogUtils.showMessage(
-                  context: context,
-                  message: "You Don't have enough balance ",
-                  actionName: 'ok',
-                  posActionFun: () {
-                    Navigator.of(context).pop();
-                  });
-            } else if (state is BuyLessonLoadingState){
-              DialogUtils.hideLoading(context);
-              DialogUtils.showLoading(context: context);
-            }
-          },
+                DialogUtils.showMessage(
+                    context: context,
+                    message: "You bought Lesson  ",
+                    actionName: 'ok',
+                    posActionFun: () {
+                      Navigator.of(context).pop();
+                      mainScreenViewModel.getFavoriteLessons(loginBloc.token);
+                    });
+              } else if (state is BuyLessonErrorState) {
+                DialogUtils.hideLoading(context);
+                DialogUtils.showMessage(
+                    context: context,
+                    message: "You Don't have enough balance ",
+                    actionName: 'ok',
+                    posActionFun: () {
+                      Navigator.of(context).pop();
+                    });
+              } else if (state is BuyLessonLoadingState) {
+                DialogUtils.hideLoading(context);
+                DialogUtils.showLoading(context: context);
+              }
+            },
             builder: (context, state) {
               if (state is GetFavoriteLessonsLoadingState) {
                 // return Expanded(
@@ -78,26 +81,43 @@ class FavoriteTab extends StatelessWidget{
                 //     ),
                 //   ),
                 // );
-                return Expanded(child:ListView.builder(itemCount: 1,itemBuilder:(context, index) =>  ShimmerLoading(width: 360.w,height: 310.h,)));
+                return Expanded(
+                    child: ListView.builder(
+                        itemCount: 1,
+                        itemBuilder: (context, index) => ShimmerLoading(
+                              width: 360.w,
+                              height: 310.h,
+                            )));
               } else if (state is GetFavoriteLessonsFailureState) {
                 return Center(
                   child: Text(
                     state.errMsg,
                     style:
-                    Styles.textStyle24.copyWith(color: MyColors.blackColor),
+                        Styles.textStyle24.copyWith(color: MyColors.blackColor),
                   ),
                 );
               } else {
-                return LessonList(
-                  lessons: mainScreenViewModel.favLessons,
-                );
+                return mainScreenViewModel.favLessons.length == 0
+                    ? Padding(
+                      padding:  EdgeInsetsDirectional.only(top: 200.h),
+                      child: Center(
+                          child: Text(
+                          "No favorite Lessons found",
+                          style: Styles.textStyle24
+                              .copyWith(color: MyColors.redColor),
+                        )),
+                    )
+                    : LessonList(
+                        lessons: mainScreenViewModel.favLessons,
+                      );
               }
             },
           ),
-          SizedBox(height: 50.h,)
+          // SizedBox(
+          //   height: 50.h,
+          // )
         ],
       ),
     );
-
   }
 }

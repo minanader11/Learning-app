@@ -38,7 +38,7 @@ class ProfileTab extends StatelessWidget {
                     children: [
                       Text(
                         MyTexts.personalInfo,
-                        style: Styles.textStyle20,
+                        style: Styles.textStyle20.copyWith(color: Colors.black),
                       ),
                       Text(
                         MyTexts.edit,
@@ -49,7 +49,7 @@ class ProfileTab extends StatelessWidget {
                     ],
                   ),
                   SizedBox(
-                    height: 50.h,
+                    height: 20.h,
                   ),
                   Row(
                     children: [
@@ -60,14 +60,15 @@ class ProfileTab extends StatelessWidget {
                       // ),
                       Container(width: 105.w,
                         height: 105.h,
-                        decoration: BoxDecoration(shape: BoxShape.circle,color: MyColors.greyColor),
-                        child: Icon(Icons.person,color: MyColors.purpleColor,size: 60.h,),),
+                        padding: EdgeInsetsDirectional.all(5.h),
+                        decoration: BoxDecoration(shape: BoxShape.circle,color: MyColors.whiteColor),
+                        child: FittedBox(child: Icon(Icons.person,color: MyColors.purpleColor,)),),
                       SizedBox(
                         width: 29.w,
                       ),
                       Text(
                         mainScreenViewModel.user.name ?? '',
-                        style: Styles.textStyle20,
+                        style: Styles.textStyle20.copyWith(color: Colors.black,fontWeight: FontWeight.w700),
                       )
                     ],
                   ),
@@ -122,6 +123,7 @@ class ProfileTab extends StatelessWidget {
                               icon: Icons.money,
                               text: MyTexts.yourBalanceAccount,
                               info: '${mainScreenViewModel.user.balance} EGP'),
+
                         ]),
                       ),
                     ),

@@ -33,7 +33,7 @@ class LessonItem extends StatelessWidget {
           Navigator.of(context).pushNamed(LessonDetailedScreen.routeName);
         }
       },
-      child: Card(
+      child: Card(color: MyColors.whiteColor,
         child: Container(
           padding: EdgeInsets.all(10),
           child: Column(
@@ -42,7 +42,7 @@ class LessonItem extends StatelessWidget {
               Stack(
                 children: [
                   Container(
-                    height: 232.h,
+                   // height: 232.h,
                     width: 360.w,
                     child: ClipRRect(
                         borderRadius: BorderRadius.circular(10),
@@ -63,14 +63,12 @@ class LessonItem extends StatelessWidget {
                         // child:Image.asset(MyTexts.productImage,fit:BoxFit.fill) ,
                         ),
                   ),
-                  Positioned(
-                    left: 240.w,
+                  PositionedDirectional(
+                    start: 240.w,
                     child: ElevatedButton(
                         onPressed: () {},
                         child: lesson.hasLesson == true || lesson.price==0
-                            ? Text(
-                                'view',
-                              )
+                            ? Icon(Icons.view_carousel_outlined)
                             : Icon(Icons.lock),
                         style: ElevatedButton.styleFrom(
                             backgroundColor: MyColors.primaryColor,
@@ -108,6 +106,7 @@ class LessonItem extends StatelessWidget {
                     .copyWith(color: MyColors.blackColor),
                 textAlign: TextAlign.right,
               ),
+              SizedBox(height: 10.h,)
             ],
           ),
         ),

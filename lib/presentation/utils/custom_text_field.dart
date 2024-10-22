@@ -22,36 +22,34 @@ class CustomTextField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.only(right: 16.w),
-      child: TextFormField(
-        style: Styles.textStyle20,
-        decoration: InputDecoration(
-
-          hintText: hint,
-          hintStyle: Styles.textStyle20,
-          enabledBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(10),
-            borderSide: BorderSide(color: MyColors.textFieldBorderColors, width: 2),
-          ),
-          focusedBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(10),
-            borderSide: BorderSide(color: MyColors.darkGreyColor, width: 2),
-          ),
-          errorBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(10),
-            borderSide: BorderSide(color: MyColors.redColor, width: 2),
-          ),
-          focusedErrorBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(10),
-            borderSide: BorderSide(color: MyColors.redColor, width: 2),
-          ),
+    return TextFormField(
+      style: Styles.textStyle20,
+      decoration: InputDecoration(
+       fillColor: color,
+        filled: true,
+        hintText: hint,
+        hintStyle: Styles.textStyle20,
+        enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(10),
+          borderSide: BorderSide(color: MyColors.textFieldBorderColors, width: 2),
         ),
-        keyboardType: keyboardType,
-        controller: controller,
-        validator: validator,
-        obscureText: obscureText,
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(10),
+          borderSide: BorderSide(color: MyColors.darkGreyColor, width: 2),
+        ),
+        errorBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(10),
+          borderSide: BorderSide(color: MyColors.redColor, width: 2),
+        ),
+        focusedErrorBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(10),
+          borderSide: BorderSide(color: MyColors.redColor, width: 2),
+        ),
       ),
+      keyboardType: keyboardType,
+      controller: controller,
+      validator: validator,
+      obscureText: obscureText,
     );
   }
 }

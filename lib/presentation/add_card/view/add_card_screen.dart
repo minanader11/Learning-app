@@ -75,9 +75,9 @@ class _AddCardScreenState extends State<AddCardScreen> {
         }
       },
       builder: (context, state) => Container(
-        margin: EdgeInsets.only(top: 57.h, right: 24.w, left: 24.w),
+        margin: EdgeInsets.only(right: 24.w, left: 24.w),
         child: SingleChildScrollView(
-          child: Container(height: 600.h,
+          child: Container(height: 700.h,padding: EdgeInsetsDirectional.only(top: 50.h),
             child: Form(
               key: _formKey,
               child: Column(
@@ -89,7 +89,7 @@ class _AddCardScreenState extends State<AddCardScreen> {
                         Styles.textStyle20.copyWith(color: MyColors.blackColor),
                   ),
                   SizedBox(
-                    height: 44.h,
+                    height: 20.h,
                   ),
                   Text(
                     MyTexts.enterYourCode,
@@ -100,9 +100,10 @@ class _AddCardScreenState extends State<AddCardScreen> {
                     height: 8.h,
                   ),
                   Container(
-                    height: 62.h,
+                    height:50.h,
+
                     child: CustomTextField(
-                        color: MyColors.primaryColor,
+                        color: MyColors.whiteColor,
                         hint: '',
                         controller: mainScreenCubit.codeController,
                         validator: (text) {
@@ -115,6 +116,7 @@ class _AddCardScreenState extends State<AddCardScreen> {
                   // CardField(controller: CardEditController(),onCardChanged: (details) {
                   //
                   // },),
+                  SizedBox(height: 5.h,),
                   TextFormField(
                     controller: mainScreenCubit.paymentController,
                     inputFormatters: [FilteringTextInputFormatter.digitsOnly],
