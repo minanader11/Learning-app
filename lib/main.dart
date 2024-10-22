@@ -22,12 +22,7 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  Stripe.publishableKey = "pk_test_51QBub9Ez0AR5aTDO0scfoAnOhSdf685PVUlP8TLQDpTmEAHStLRqasFcgumePUwzc5wy96bagdJGOxux7B1ttrCX00DdUQFCL3";
-// to load secret key from .env file
-  Stripe.merchantIdentifier = 'merchant.flutter.stripe.test';
-  Stripe.urlScheme = 'flutterstripe';
 
-  await dotenv.load(fileName: "assets/.env");
   await Stripe.instance.applySettings();
   runApp(MultiBlocProvider(providers: [
     BlocProvider<RegisterViewModel>(
